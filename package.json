@@ -8,20 +8,18 @@
     "url": "https://github.com/arackaf/express-controllers.git"
   },
   "author": "Adam Rackis",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/arackaf/express-controllers/issues"
   },
   "homepage": "https://github.com/arackaf/express-controllers",
-  "dependencies": {
+  "devDependencies": {
     "express": "4.x",
     "chai": "^3.3.0",
     "mocha": "^2.3.3",
     "gulp": "^3.9.0",
     "gulp-mocha": "^2.1.3",
-    "request": "^2.64.0"
-  },
-  "devDependencies": {
+    "request": "^2.64.0",
     "body-parser": "^1.13.2"
   }
 }
