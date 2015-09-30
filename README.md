@@ -23,7 +23,7 @@ Inside the method relevant response objects have been added to the object itself
 
 Of course this is just a proof of concept at the moment, but eventually there would be decorators to mark a method as non routable, override a path name, etc.
 
-If this isn't an awful idea, future features would likely include:
+Future features will include:
 
 - automatic controller generation by walking existing files (obviously).
 - configurable root for all controllers, instead of hard coding to /controllers.

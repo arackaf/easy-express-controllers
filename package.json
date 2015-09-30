@@ -1,5 +1,5 @@
 {
-  "name": "express-controllers",
+  "name": "easy-express-controllers",
   "version": "0.0.1",
   "description": "Adding MVC style controller support with ES6 class and ES-next decorators to Express.",
   "main": "index.js",
