@@ -3,3 +3,5 @@ node_modules/
 tests/requestDiscoveryTests.js
 tests/coreRoutingTests.js
 testUtil/testSetup.js
+expressController.js
+controllers/Person.js
