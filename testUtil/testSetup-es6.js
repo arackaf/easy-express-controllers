@@ -26,8 +26,13 @@ function getAndCheck(uri, data, done, check, options){
 }
 
 function runAndCheck(uri, data, verb, done, check, options = { }){
-    request[verb](uri, data, function(error, response, obj){
-        check(JSON.parse(obj));
+    request({
+        uri,
+        method: verb,
+        body: data,
+        json: true
+    }, function(error, response, obj){
+        check(obj);
         done();
     });
 }

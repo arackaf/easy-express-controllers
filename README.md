@@ -1,5 +1,5 @@
 # express-controllers
-Adding MVC style controller support with ES6 class and ES-next decorators to Express.
+Adding MVC style controller support to Express with ES6 class, and ES-next decorators.
 
 We have class via ES6, and we have annotations via the ES.next decorator proposal.  This project seeks to leverage both to emulate traditional MVC frameworks in traditional languages.
 
@@ -14,6 +14,11 @@ class Person{
     save(){
         this.send({ saved: true });
     }
+    @httpPost
+    setStuff(x, y, z){
+        //These parameter values will be parsed and set for you.  No need to parse request.body or request.query - just use them
+        this.send({ x, y, z });
+    }
 }
 ```
 
@@ -21,12 +26,10 @@ Methods default to GET paths based on name, which is overridable with a decorato
 
 Inside the method relevant response objects have been added to the object itself (for now just `send`), and the original request and response objects are also available.
 
-Of course this is just a proof of concept at the moment, but eventually there would be decorators to mark a method as non routable, override a path name, etc.
+Method parameters are parsed from the request body and set for you.  Will not work with ES6 default parameter values yet, but Node doesn't even support that at the moment.
 
 Future features will include:
 
 - automatic controller generation by walking existing files (obviously).
 - configurable root for all controllers, instead of hard coding to /controllers.
-- support for method parameters, so `save(name, gender)` would be passed the name and gender values from the posted data.
-- middleware support for custom controller creation, which is usually used for DI.
-- and of course more robust transpilation so generated ES5 files won't be checked in.
+- more decorators to support things like custom action paths, marking a method as non-routable, etc.

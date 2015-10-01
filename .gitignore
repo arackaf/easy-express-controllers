@@ -5,3 +5,6 @@ tests/coreRoutingTests.js
 testUtil/testSetup.js
 expressController.js
 controllers/Person.js
+runTestControllers.js
+tests/parameterSnifferTests.js
+util/parameterSniffer.js

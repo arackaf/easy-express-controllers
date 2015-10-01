@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+
+    <script type="text/javascript">
+
+        function r1(){
+            $.ajax({
+                url: '/person/save',
+                //contentType: 'application/json',
+                data: { name: 'Adam Rackis Post' },
+                dataType: 'json',
+                method: 'POST'
+            });
+        }
+
+        function r2(){
+            $.ajax({
+                url: '/person/details',
+                contentType: 'application/json',
+                data: { name: 'Adam Rackis Get' },
+                dataType: 'json',
+                method: 'GET'
+            });
+        }
+
+    </script>
+
+</head>
+<body>
+
+    <button onclick="r1()">Run 1 - post</button>
+
+    <button onclick="r2()">Run 2 - get</button>
+
+</body>
+</html>
