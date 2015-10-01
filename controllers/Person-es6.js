@@ -1,3 +1,5 @@
+const { httpPost } = require('../expressController');
+
 class Person{
     details(){
         this.send({ name: 'Adam' });

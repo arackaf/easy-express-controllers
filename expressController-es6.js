@@ -28,8 +28,7 @@ function httpPost(target, name, decorator){
     };
 }
 
-global.httpPost = httpPost;
-
 module.exports = {
-    createController
+    createController,
+    httpPost
 };
