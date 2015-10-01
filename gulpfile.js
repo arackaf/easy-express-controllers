@@ -18,5 +18,6 @@ gulp.task('test', function () {
     require('./testUtil/testSetup');
 
     gulp.src('tests/**/!(*-es6.js)') //we don't want es6 files - just the transpiled results
-        .pipe(mocha());
+        .pipe(mocha())
+		.on('end', function(){ server.close(); });
 });

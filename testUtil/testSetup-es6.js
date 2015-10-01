@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
     extended: true
 }));
 
-app.listen(3000);
+global.server = app.listen(3000);
 
 global.app = app;
 global.request = request;
