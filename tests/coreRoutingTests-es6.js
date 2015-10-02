@@ -60,5 +60,7 @@ describe('Controller routing tests', function(){
         utils.postAndCheck('http://localhost:3000/person/z/xx', { }, done, obj => assert.isTrue(obj.received));
     });
 
-
+    it('rejects default paths for non-routeable action', function(done){
+        utils.verbsAreRejected('http://localhost:3000/person/dontTouchMe', done, ['get', 'post', 'put', 'delete']);
+    });
 });

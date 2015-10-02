@@ -1,4 +1,4 @@
-const { httpPost, route } = require('../expressController');
+const { httpPost, route, nonRoutable } = require('../expressController');
 
 class Person{
     details(){
@@ -37,6 +37,10 @@ class Person{
     @route('z/:a/x/:b')
     customPathWithPost3(a, b, c){
         this.send({ a, b, c });
+    }
+    @nonRoutable
+    dontTouchMe(){
+        this.send({});
     }
 }
 

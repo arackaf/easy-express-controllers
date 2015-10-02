@@ -23,6 +23,10 @@ class Person{
     getUserBillingInfo(userId, billingId){
         this.send({ userId, parentId });
     }
+    @nonRoutable
+    dontTouchMe(){
+        //do some private work the other controller actions might all use
+    }
 }
 ```
 
@@ -33,6 +37,8 @@ Inside the method relevant response objects have been added to the object itself
 Method parameters are parsed from the request body and set for you.  Will not work with ES6 default parameter values yet, but Node doesn't even support that at the moment.
 
 Set an overridden route for an action, so person/billing/:userId/:billingId will route to getUserBillingInfo and pass in those parameter values.
+
+If you have a class method that you want to never be routed to, you can either define it with a symbol, OR just add the @nonRoutable decorator.
 
 Future features will include:
 

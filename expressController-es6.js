@@ -14,6 +14,8 @@ function createController(app, path){
             verbToUse = methodOverrides.httpMethod || 'get',
             parameterNames = getParameterNames(classDec.prototype[method]);
 
+        if (methodOverrides.nonRoutable) return;
+
         router[verbToUse](`/${methodOverrides.route || method}`, function(req, res){
             let requestValues = getRequestValues(req),
                 parameterValues = parameterNames.map(name => requestValues[name]);
@@ -59,8 +61,19 @@ function route(routeName){
     }
 }
 
+function nonRoutable(target, name, decorator){
+    if (!target.constructor.routeOverrides){
+        target.constructor.routeOverrides = {};
+    }
+    if (!target.constructor.routeOverrides[name]){
+        target.constructor.routeOverrides[name] = { };
+    }
+    target.constructor.routeOverrides[name].nonRoutable = true;
+}
+
 module.exports = {
     createController,
     httpPost,
-    route
+    route,
+    nonRoutable
 };
