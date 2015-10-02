@@ -10,10 +10,11 @@ function createController(app, path){
     Object.getOwnPropertyNames(classDec.prototype).forEach(method => {
         if (method === 'constructor' || typeof classDec.prototype[method] !== 'function') return;
 
-        let verbToUse = (overrides[method] && overrides[method].httpMethod) || 'get',
+        let methodOverrides = overrides[method] || { },
+            verbToUse = methodOverrides.httpMethod || 'get',
             parameterNames = getParameterNames(classDec.prototype[method]);
 
-        router[verbToUse](`/${method}`, function(req, res){
+        router[verbToUse](`/${methodOverrides.route || method}`, function(req, res){
             let requestValues = getRequestValues(req),
                 parameterValues = parameterNames.map(name => requestValues[name]);
 
@@ -30,21 +31,36 @@ function createController(app, path){
 
 function getRequestValues(req){
     let body = typeof req.body === 'object' ? req.body : null,
-        query = typeof req.query === 'object' ? req.query : null;
+        query = typeof req.query === 'object' ? req.query : null,
+        params = typeof req.params === 'object' ? req.params : null;
 
-    return extend({}, body, query);
+    return extend({}, body, query, params);
 }
 
 function httpPost(target, name, decorator){
     if (!target.constructor.routeOverrides){
         target.constructor.routeOverrides = {};
     }
-    target.constructor.routeOverrides[name] = {
-        httpMethod: 'post'
-    };
+    if (!target.constructor.routeOverrides[name]){
+        target.constructor.routeOverrides[name] = { };
+    }
+    target.constructor.routeOverrides[name].httpMethod = 'post';
+}
+
+function route(routeName){
+    return function (target, name, decorator){
+        if (!target.constructor.routeOverrides){
+            target.constructor.routeOverrides = {};
+        }
+        if (!target.constructor.routeOverrides[name]){
+            target.constructor.routeOverrides[name] = { };
+        }
+        target.constructor.routeOverrides[name].route = routeName;
+    }
 }
 
 module.exports = {
     createController,
-    httpPost
+    httpPost,
+    route
 };

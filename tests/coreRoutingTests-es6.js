@@ -1,6 +1,6 @@
 describe('Controller routing tests', function(){
 
-    beforeEach(function(){
+    before(function(){
         expressController.createController(app, 'person');
     });
 
@@ -31,5 +31,34 @@ describe('Controller routing tests', function(){
     it('sets parameter values for POST', function(done){
         utils.postAndCheck('http://localhost:3000/person/setStuffA', { x: 1, y: 2, z: 3 }, done, obj => assert.deepEqual(obj, { x: 1, y: 2, z: 3 }));
     });
+
+    it('routes custom paths', function(done){
+        utils.getAndCheck('http://localhost:3000/person/x/y/z', { }, done, obj => assert.isTrue(obj.madeIt));
+    });
+
+    it('rejects default paths for overridden routes', function(done){
+        utils.verbsAreRejected('http://localhost:3000/person/customPathBasic', done, ['get', 'post', 'put', 'delete']);
+    });
+
+    it('routes custom paths with parameters passed', function(done){
+        utils.getAndCheck('http://localhost:3000/person/x/12/z/13', { }, done, obj => assert.deepEqual(obj, { userId: '12', parentId: '13' }));
+    });
+
+    it('posts to custom paths', function(done){
+        utils.postAndCheck('http://localhost:3000/person/z/x', { }, done, obj => assert.isTrue(obj.received));
+    });
+
+    it('posts to custom paths with attributes', function(done){
+        utils.postAndCheck('http://localhost:3000/person/z/6/x/5', { }, done, obj => assert.deepEqual(obj, { a: '6', b: '5' }));
+    });
+
+    it('posts to custom paths with attributes and body params', function(done){
+        utils.postAndCheck('http://localhost:3000/person/z/6/x/5', { c: 4 }, done, obj => assert.deepEqual(obj, { a: '6', b: '5', c: 4 }));
+    });
+
+    it('posts to custom paths with attributes in other order', function(done){
+        utils.postAndCheck('http://localhost:3000/person/z/xx', { }, done, obj => assert.isTrue(obj.received));
+    });
+
 
 });

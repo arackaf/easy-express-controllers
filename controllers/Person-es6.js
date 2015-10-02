@@ -1,4 +1,4 @@
-const { httpPost } = require('../expressController');
+const { httpPost, route } = require('../expressController');
 
 class Person{
     details(){
@@ -14,6 +14,29 @@ class Person{
     @httpPost
     setStuffA(x, y, z){
         this.send({ x, y, z });
+    }
+    @route('x/y/z')
+    customPathBasic(){
+        this.send({ madeIt: true });
+    }
+    @route('x/:userId/z/:parentId')
+    customPathWithParameters(userId, parentId){
+        this.send({ userId, parentId });
+    }
+    @route('z/x')
+    @httpPost
+    customPathWithPost(){
+        this.send({ received: true });
+    }
+    @httpPost
+    @route('z/xx')
+    customPathWithPost2(){
+        this.send({ received: true });
+    }
+    @httpPost
+    @route('z/:a/x/:b')
+    customPathWithPost3(a, b, c){
+        this.send({ a, b, c });
     }
 }
 

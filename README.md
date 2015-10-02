@@ -19,6 +19,10 @@ class Person{
         //These parameter values will be parsed and set for you.  No need to parse request.body or request.query - just use them
         this.send({ x, y, z });
     }
+    @route('billing/:userId/:billingId')
+    getUserBillingInfo(userId, billingId){
+        this.send({ userId, parentId });
+    }
 }
 ```
 
@@ -28,8 +32,10 @@ Inside the method relevant response objects have been added to the object itself
 
 Method parameters are parsed from the request body and set for you.  Will not work with ES6 default parameter values yet, but Node doesn't even support that at the moment.
 
+Set an overridden route for an action, so person/billing/:userId/:billingId will route to getUserBillingInfo and pass in those parameter values.
+
 Future features will include:
 
 - automatic controller generation by walking existing files (obviously).
 - configurable root for all controllers, instead of hard coding to /controllers.
-- more decorators to support things like custom action paths, marking a method as non-routable, etc.
+- more decorators to support things like marking a method as non-routable, etc.
