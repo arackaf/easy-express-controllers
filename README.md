@@ -6,6 +6,8 @@ We have class via ES6, and we have annotations via the ES.next decorator proposa
 For example
 
 ```javascript
+const { httpPost, route, nonRoutable } = require('expressController');
+
 class Person{
     details(){
         this.send({ name: 'Adam' });
