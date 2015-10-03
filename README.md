@@ -43,7 +43,7 @@ Methods default to GET.  To override this, you can add one or more decorators of
 
 Inside the controller method the following methods from the response object will be directly available through `this`: `send`, `sendFile`, `json`, `jsonp`.  The original request and response objects are also available through `this.request` and `this.response` respectively.
 
-Method parameters are parsed from the request and set for you.  Matching values are added if found on `request.params`, `request.query`, and `request.body` in that order of precedence: a matching value from `request.params` will be passed over a matching value from `request.body`. This will not work with ES6 default parameter values yet, but Node doesn't even support that at the moment.
+Method parameters are parsed from the request and set for you.  Matching values are added if found on `request.params`, `request.query`, and `request.body` in that order of precedence: a matching value from `request.params` will be passed over a matching value from `request.body`. This will not work with ES6 default parameter values yet, but Node doesn't even support them at the moment.  The search for a matching parameter name is case insensitive.
 
 **NOTE**: to ensure parameter parsing works make sure you have your middleware setup appropriately:
 
