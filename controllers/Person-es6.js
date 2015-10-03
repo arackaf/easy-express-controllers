@@ -1,4 +1,4 @@
-const { httpPost, route, nonRoutable } = require('../expressController');
+const { httpGet, httpPut, httpDelete, httpPost, acceptVerbs, route, nonRoutable } = require('../expressController');
 
 class Person{
     details(){
@@ -41,6 +41,56 @@ class Person{
     @nonRoutable
     dontTouchMe(){
         this.send({});
+    }
+    @acceptVerbs(['put', 'delete'])
+    putOrDeleteToMe(){
+        this.send({ received: true });
+    }
+    @httpPut
+    @httpDelete
+    putOrDeleteToMe2(){
+        this.send({ received: true });
+    }
+    @acceptVerbs(['put', 'delete'])
+    @httpPost
+    postPutOrDeleteToMe(){
+        this.send({ received: true });
+    }
+    @acceptVerbs(['post', 'put', 'delete'])
+    postPutOrDeleteToMe2(){
+        this.send({ received: true });
+    }
+    @httpPut
+    @httpDelete
+    @httpPost
+    postPutOrDeleteToMe3(){
+        this.send({ received: true });
+    }
+    @httpPost
+    @acceptVerbs(['put', 'delete'])
+    postPutOrDeleteToMeReversedDecorators(){
+        this.send({ received: true });
+    }
+    @httpPut
+    putToMe(){
+        this.send({ received: true });
+    }
+    @acceptVerbs('put')
+    putToMe2(){
+        this.send({ received: true });
+    }
+    @httpDelete
+    deleteToMe(){
+        this.response.send({ received: true });
+    }
+    @httpGet
+    @httpPost
+    getOrPostToMe(){
+        this.send({ received: true });
+    }
+    @acceptVerbs(['get', 'post'])
+    getOrPostToMe2(){
+        this.send({ received: true });
     }
 }
 

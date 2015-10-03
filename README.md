@@ -1,7 +1,6 @@
-# express-controllers
-Adding MVC style controller support to Express with ES6 class, and ES-next decorators.
+# easy-express-controllers
 
-We have class via ES6, and we have annotations via the ES.next decorator proposal.  This project seeks to leverage both to emulate traditional MVC frameworks in traditional languages.
+Adds traditional MVC style controller support to Express with ES6 class, and ES-next decorators.
 
 For example
 
@@ -32,18 +31,42 @@ class Person{
 }
 ```
 
-Methods default to GET paths based on name, which is overridable with a decorator.  So a `GET` to `/person/details` or a `POST` to `/person/save` above both route appropriately.
+# Docs #
 
-Inside the method relevant response objects have been added to the object itself (for now just `send`), and the original request and response objects are also available.
+## Class methods and routes ##
 
-Method parameters are parsed from the request body and set for you.  Will not work with ES6 default parameter values yet, but Node doesn't even support that at the moment.
+Each method found on your class's prototype through `Object.getOwnPropertyNames` will become a route for the path `/{your controller path}/{method name}`.  So from the example above `/person/details`, `/person/save`, etc route appropriately.
 
-Set an overridden route for an action, so person/billing/:userId/:billingId will route to getUserBillingInfo and pass in those parameter values.
+Methods default to GET.  To override this, you can add one or more decorators of `@httpPost`, `@httpGet`, `@httpPut` and `@httpDelete`, or add multiple verbs at one time through `@acceptVerbs`, which accepts an array, for example `@acceptVerbs(['put', 'delete'])`.
 
-If you have a class method that you want to never be routed to, you can either define it with a symbol, OR just add the @nonRoutable decorator.
+## Handling Routes ##
 
-Future features will include:
+Inside the controller method the following methods from the response object will be directly available through `this`: `send`, `sendFile`, `json`, `jsonp`.  The original request and response objects are also available through `this.request` and `this.response` respectively.
 
-- automatic controller generation by walking existing files (obviously).
-- configurable root for all controllers, instead of hard coding to /controllers.
-- more decorators to support things like marking a method as non-routable, etc.
+Method parameters are parsed from the request and set for you.  Matching values are added if found on `request.params`, `request.query`, and `request.body` in that order of precedence: a matching value from `request.params` will be passed over a matching value from `request.body`. This will not work with ES6 default parameter values yet, but Node doesn't even support that at the moment.
+
+**NOTE**: to ensure parameter parsing works make sure you have your middleware setup appropriately:
+
+```javascript
+var bodyParser = require('body-parser');
+
+app.use(bodyParser.json());       // to support JSON-encoded bodies
+app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+    extended: true
+}));
+```
+
+## Overriding route paths ##
+
+If you want to override the path for a class method, just use the `@route` decorator.  In the code above, `person/billing/:userId/:billingId` will route to the `getUserBillingInfo` method and pass in those parameter values.
+
+If you have a class method that you want to never be routed to, you can either define it with a symbol, so `Object.getOwnPropertyNames` misses it, or just add the @nonRoutable decorator.
+
+## Future features ##
+
+- automatic controller generation by walking existing files.
+- configurable root for all controllers, instead of hard coding to `/controllers`.
+- allow custom routes to dump the `/{controller}` route
+
+
+

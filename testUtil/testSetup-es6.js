@@ -25,6 +25,14 @@ function getAndCheck(uri, data, done, check, options){
     runAndCheck(uri, data, 'get', done, check);
 }
 
+function putAndCheck(uri, data, done, check, options){
+    runAndCheck(uri, data, 'put', done, check);
+}
+
+function deleteAndCheck(uri, data, done, check, options){
+    runAndCheck(uri, data, 'delete', done, check);
+}
+
 function runAndCheck(uri, data, verb, done, check, options = { }){
     request({
         uri,
@@ -53,6 +61,8 @@ function verbsAreRejected(uri, done, verbs){
 global.utils = {
     postAndCheck,
     getAndCheck,
+    putAndCheck,
+    deleteAndCheck,
     runAndCheck,
     verbsAreRejected
 };
