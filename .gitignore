@@ -8,3 +8,5 @@ controllers/Person.js
 runTestControllers.js
 tests/parameterSnifferTests.js
 util/parameterSniffer.js
+controllers/GlobalController.js
+tests/advancedRoutingTests.js

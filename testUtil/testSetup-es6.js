@@ -58,11 +58,24 @@ function verbsAreRejected(uri, done, verbs){
     }
 }
 
+function checkRoutesAndVerbs(uri, verbs){
+    verbs.forEach(verb => {
+        it(`routes ${verb} to ${uri.replace('http://localhost:3000', '')}`, function(done){
+            utils[`${verb}AndCheck`](uri, {}, done, obj => assert.isTrue(obj.received));
+        });
+    });
+    let badVerbs = ['get', 'post', 'put', 'delete'].filter(verb => verbs.indexOf(verb) === -1);
+    it(`rejects ${uri} with [${badVerbs}]`, function(done) {
+        utils.verbsAreRejected(uri, done, badVerbs);
+    });
+}
+
 global.utils = {
     postAndCheck,
     getAndCheck,
     putAndCheck,
     deleteAndCheck,
     runAndCheck,
-    verbsAreRejected
+    verbsAreRejected,
+    checkRoutesAndVerbs
 };

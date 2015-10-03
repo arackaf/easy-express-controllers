@@ -10,27 +10,37 @@ function createController(app, path){
     Object.getOwnPropertyNames(classDec.prototype).forEach(method => {
         if (method === 'constructor' || typeof classDec.prototype[method] !== 'function') return;
 
-        let methodOverrides = overrides[method] || { },
-            verbsToUse = methodOverrides.httpMethod || ['get'],
-            parameterNames = getParameterNames(classDec.prototype[method]);
+        let methodOverrides = overrides[method] || { };
 
         if (methodOverrides.nonRoutable) return;
 
-        verbsToUse.forEach(verb => {
-            router[verb](`/${methodOverrides.route || method}`, function (req, res) {
-                let { requestValues, body, query, params } = getRequestValues(req),
-                    parameterValues = parameterNames.map(name => caseInsensitiveLookup(name, body, query, params));
+        let verbsToUse = methodOverrides.httpMethod || ['get'],
+            parameterNames = getParameterNames(classDec.prototype[method]),
+            actionPath = methodOverrides.route || method;
 
-                let obj = new classDec();
-                obj.request = req;
-                obj.response = res;
-                ['send', 'sendFile', 'json', 'jsonp'].forEach(m => obj[m] = res[m].bind(res));
-                obj[method](...parameterValues);
-            });
-        });
+        if (actionPath[0] == '/'){
+            //global path - add right to express
+            verbsToUse.forEach(verb => app[verb](actionPath, createRouteCallback(classDec, method, parameterNames)));
+        } else {
+            //normal path - add to the router
+            verbsToUse.forEach(verb => router[verb](`/${actionPath}`, createRouteCallback(classDec, method, parameterNames)));
+        }
     });
 
     app.use(`/${path}`, router);
+}
+
+function createRouteCallback(classDec, method, parameterNames){
+    return function(req, res){
+        let { allRequestValues, body, query, params } = getRequestValues(req),
+            parameterValues = parameterNames.map(name => caseInsensitiveLookup(name, body, query, params));
+
+        let obj = new classDec();
+        obj.request = req;
+        obj.response = res;
+        ['send', 'sendFile', 'json', 'jsonp'].forEach(m => obj[m] = res[m].bind(res));
+        obj[method](...parameterValues);
+    };
 }
 
 function getRequestValues(req){
