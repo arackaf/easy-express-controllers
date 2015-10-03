@@ -23,6 +23,10 @@ class Person{
     customPathWithParameters(userId, parentId){
         this.send({ userId, parentId });
     }
+    @route('x2/:USERID/z2/:PARENTID')
+    customPathWithParameters2(userId, parentId){
+        this.send({ userId, parentId });
+    }
     @route('z/x')
     @httpPost
     customPathWithPost(){

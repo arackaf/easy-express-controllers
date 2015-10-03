@@ -18,8 +18,8 @@ function createController(app, path){
 
         verbsToUse.forEach(verb => {
             router[verb](`/${methodOverrides.route || method}`, function (req, res) {
-                let requestValues = getRequestValues(req),
-                    parameterValues = parameterNames.map(name => requestValues[name]);
+                let { requestValues, body, query, params } = getRequestValues(req),
+                    parameterValues = parameterNames.map(name => caseInsensitiveLookup(name, body, query, params));
 
                 let obj = new classDec();
                 obj.request = req;
@@ -34,11 +34,24 @@ function createController(app, path){
 }
 
 function getRequestValues(req){
-    let body = typeof req.body === 'object' ? req.body : null,
-        query = typeof req.query === 'object' ? req.query : null,
-        params = typeof req.params === 'object' ? req.params : null;
+    let body = typeof req.body === 'object' ? req.body : {},
+        query = typeof req.query === 'object' ? req.query : {},
+        params = typeof req.params === 'object' ? req.params : {};
 
-    return extend({}, body, query, params);
+    return { requestValues: extend({}, body, query, params), body, query, params };
+}
+
+function caseInsensitiveLookup(name, body, query, params){
+    return getValue(params) || getValue(query) || getValue(body);
+
+    function getValue(checkingObject){
+        let keys = Object.keys(checkingObject);
+        for (let i = 0; i < keys.length; i++){
+            if (name.toLowerCase() == keys[i].toLowerCase()){
+                return checkingObject[keys[i]];
+            }
+        }
+    }
 }
 
 function httpGet(target, name, decorator){
