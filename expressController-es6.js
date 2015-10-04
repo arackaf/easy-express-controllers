@@ -5,12 +5,13 @@ function createController(app, path){
     var router = require('express').Router();
 
     var classDec = require(`./controllers/${path}`);
-    let overrides = classDec.routeOverrides || {};
+    let routeOverrides = classDec.routeOverrides || {},
+        controllerSettings = classDec.controllerSettings || {};
 
     Object.getOwnPropertyNames(classDec.prototype).forEach(method => {
         if (method === 'constructor' || typeof classDec.prototype[method] !== 'function') return;
 
-        let methodOverrides = overrides[method] || { };
+        let methodOverrides = routeOverrides[method] || { };
 
         if (methodOverrides.nonRoutable) return;
 
@@ -27,7 +28,7 @@ function createController(app, path){
         }
     });
 
-    app.use(`/${path}`, router);
+    app.use(`/${controllerSettings.path || path}`, router);
 }
 
 function createRouteCallback(classDec, method, parameterNames){
@@ -61,6 +62,12 @@ function caseInsensitiveLookup(name, body, query, params){
                 return checkingObject[keys[i]];
             }
         }
+    }
+}
+
+function controller({ path }){
+    return function (target, name, decorator){
+        target.controllerSettings = { path };
     }
 }
 
@@ -128,6 +135,7 @@ function nonRoutable(target, name, decorator){
 
 module.exports = {
     createController,
+    controller,
     httpGet,
     httpPost,
     httpPut,

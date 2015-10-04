@@ -17,7 +17,8 @@ class Person{
     }
     @httpPost
     setStuff(x, y, z){
-        //These parameter values will be parsed and set for you.  No need to parse request.body or request.query - just use them
+        //These parameter values will be parsed and set for you.
+        //No need to parse request.body or request.query - just use them
         this.send({ x, y, z });
     }
     @route('billing/:userId/:billingId')
@@ -35,7 +36,37 @@ class Person{
 
 ## Class methods and routes ##
 
-Each method found on your class's prototype through `Object.getOwnPropertyNames` will become a route for the path `/{your controller path}/{method name}`.  So from the example above `/person/details`, `/person/save`, etc route appropriately.
+Each method found on your class's prototype through `Object.getOwnPropertyNames` will become a route for the path `/{your controller path}/{method name}`.  So from the example above `/person/details`, `/person/save`, etc route appropriately, assuming the Person class is found directly under your `controllers` directory.  If you have a class method that you want to never be routed to, you can either define it with a symbol, so `Object.getOwnPropertyNames` misses it, or just add the `@nonRoutable` decorator.
+
+These routes are added through Express 4's router, and the call to `app.use` is passed the controller class's path.  So if your controller was located at `books/Book.js`, and had a method `details`, then the path would be `books/book/details`.  The base path of the contorller can be overridden with the `@controller` decorator, which accepts an object literal; the `path` property therein overrides this value.  For example, if this controller was located under the `controllers` directory at `publisher/publisherDetails.js`
+
+```javascript
+@controller({ path: 'publisher' })
+class publisherDetails {
+    details(){
+        this.send({ received: true });
+    }
+}
+```
+
+then the path to the details method would be `/publisher/details`, as opposed to `publisher/publisherDetails/details` if this decorator were absent.
+
+## Overriding route paths ##
+
+If you want to override the path for a class method, just use the `@route` decorator.  In the code above, `person/billing/:userId/:billingId` will route to the `getUserBillingInfo` method and pass in those parameter values (as explained further below).
+
+If you'd like to set the complete path for a controller action, overriding even the base controller path, just use the `@route` decorator, and use a leading slash.  For example
+
+```javascript
+@httpPost
+@route('/some-global-path/:userId')
+about(userId){
+}
+```
+
+the path `/some-global-path/:userId` will trigger the method above, regardless of what controller it sits in, or the path thereto.
+
+## Path verbs
 
 Methods default to GET.  To override this, you can add one or more decorators of `@httpPost`, `@httpGet`, `@httpPut` and `@httpDelete`, or add multiple verbs at one time through `@acceptVerbs`, which accepts an array, for example `@acceptVerbs(['put', 'delete'])`.
 
@@ -55,12 +86,6 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
     extended: true
 }));
 ```
-
-## Overriding route paths ##
-
-If you want to override the path for a class method, just use the `@route` decorator.  In the code above, `person/billing/:userId/:billingId` will route to the `getUserBillingInfo` method and pass in those parameter values.
-
-If you have a class method that you want to never be routed to, you can either define it with a symbol, so `Object.getOwnPropertyNames` misses it, or just add the @nonRoutable decorator.
 
 ## Future features ##
 
