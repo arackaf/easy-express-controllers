@@ -37,8 +37,7 @@ class Person{
 ## Turning an ES6 class into express paths ##
 
 ```javascript
-var expressController = require('easy-express-controllers'),
-    easyControllers = expressController.easyControllers;
+var easyControllers = require('easy-express-controllers').easyControllers;
 easyControllers.createController(app, 'person');
 ```
 The code above will require `person.js` from under a root-level `controllers` directory.  Eventually this base path will be configurable.
