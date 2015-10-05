@@ -3,7 +3,7 @@ var app = express();
 var assert = require('chai').assert;
 var request = require('request');
 var bodyParser = require('body-parser');
-var expressController = require('../expressController');
+var expressController = require('../index');
 
 app.use(bodyParser.json());       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
@@ -15,6 +15,7 @@ global.server = app.listen(3000);
 global.app = app;
 global.request = request;
 global.expressController = expressController;
+global.easyControllers = expressController.easyControllers;
 global.assert = assert;
 
 function postAndCheck(uri, data, done, check, options){

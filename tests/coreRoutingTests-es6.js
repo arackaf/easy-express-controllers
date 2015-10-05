@@ -1,7 +1,7 @@
 describe('Controller routing tests', function(){
 
     before(function(){
-        expressController.createController(app, 'person');
+        easyControllers.createController(app, 'person');
     });
 
     it('routes default get paths', function(done){

@@ -1,7 +1,7 @@
 describe('Nested routes tests', function() {
 
     before(function () {
-        expressController.createController(app, 'publisher/publisherDetails');
+        easyControllers.createController(app, 'publisher/publisherDetails');
     });
 
     it('routes default get paths when controller path overridden', function (done) {

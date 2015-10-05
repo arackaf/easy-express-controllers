@@ -1,4 +1,4 @@
-const { httpGet, httpPut, httpDelete, httpPost, acceptVerbs, route, nonRoutable, controller } = require('../../expressController');
+const { httpGet, httpPut, httpDelete, httpPost, acceptVerbs, route, nonRoutable, controller } = require('../../index');
 
 @controller({ path: 'publisher' })
 class publisherDetails {

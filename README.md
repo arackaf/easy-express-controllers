@@ -5,7 +5,7 @@ Adds traditional MVC style controller support to Express with ES6 class, and ES-
 For example
 
 ```javascript
-const { httpPost, route, nonRoutable } = require('expressController');
+const { httpPost, route, nonRoutable } = require('easy-express-controllers');
 
 class Person{
     details(){
@@ -34,6 +34,17 @@ class Person{
 
 # Docs #
 
+## Turning an ES6 class into express paths ##
+
+```javascript
+var expressController = require('../index'),
+    easyControllers = expressController.easyControllers;
+easyControllers.createController(app, 'person');
+```
+The code above will require `person.js` from under a root-level `controllers` directory.  Eventually this base path will be configurable.
+
+Soon there will also be a mechanism to have this utility walk an entire directory and create all controllers for you.
+
 ## Class methods and routes ##
 
 Each method found on your class's prototype through `Object.getOwnPropertyNames` will become a route for the path `/{your controller path}/{method name}`.  So from the example above `/person/details`, `/person/save`, etc route appropriately, assuming the Person class is found directly under your `controllers` directory.  If you have a class method that you want to never be routed to, you can either define it with a symbol, so `Object.getOwnPropertyNames` misses it, or just add the `@nonRoutable` decorator.
@@ -53,7 +64,7 @@ then the path to the details method would be `/publisher/details`, as opposed to
 
 ## Overriding route paths ##
 
-If you want to override the path for a class method, just use the `@route` decorator.  In the code above, `person/billing/:userId/:billingId` will route to the `getUserBillingInfo` method and pass in those parameter values (as explained further below).
+If you want to override the path for a class method, just use the `@route` decorator.  In the first demo code above, `person/billing/:userId/:billingId` will route to the `getUserBillingInfo` method and pass in those parameter values (as explained further below).
 
 If you'd like to set the complete path for a controller action, overriding even the base controller path, just use the `@route` decorator, and use a leading slash.  For example
 

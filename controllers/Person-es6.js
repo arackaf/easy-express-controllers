@@ -1,4 +1,4 @@
-const { httpGet, httpPut, httpDelete, httpPost, acceptVerbs, route, nonRoutable } = require('../expressController');
+const { httpGet, httpPut, httpDelete, httpPost, acceptVerbs, route, nonRoutable } = require('../index');
 
 class Person{
     details(){

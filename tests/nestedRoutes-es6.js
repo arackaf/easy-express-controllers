@@ -1,7 +1,7 @@
 describe('Nested routes tests', function() {
 
     before(function () {
-        expressController.createController(app, 'books/book');
+        easyControllers.createController(app, 'books/book');
     });
 
     it('routes default get paths', function (done) {
