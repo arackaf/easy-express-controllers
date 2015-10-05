@@ -37,7 +37,7 @@ class Person{
 ## Turning an ES6 class into express paths ##
 
 ```javascript
-var expressController = require('../index'),
+var expressController = require('easy-express-controllers'),
     easyControllers = expressController.easyControllers;
 easyControllers.createController(app, 'person');
 ```
