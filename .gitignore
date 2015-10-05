@@ -7,12 +7,9 @@ expressController.js
 controllers/Person.js
 runTestControllers.js
 tests/parameterSnifferTests.js
-util/parameterSniffer.js
 controllers/GlobalController.js
 tests/advancedRoutingTests.js
 controllers/books/Book.js
 controllers/publisher/publisherDetails.js
 tests/controllerOverrideTests.js
 tests/nestedRoutes.js
-util/createController.js
-util/decorators.js
