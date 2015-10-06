@@ -2,9 +2,10 @@ var extend = require('extend');
 var { getParameterNames } = require('./parameterSniffer');
 var path = require('path');
 
-function createController(app, controllerPath){
+function createController(app, controllerPath, overrides = { }){
+
     let router = require('express').Router(),
-        classBasePath = path.relative(__dirname, path.resolve(path.dirname(require.main), "controllers")).replace(/\\/g, '/'),
+        classBasePath = path.relative(__dirname, path.resolve(overrides.__dirname || path.dirname('.'), overrides.controllerPath || "controllers")).replace(/\\/g, '/'),
         classDec = require(`${classBasePath}/${controllerPath}`),
         routeOverrides = classDec.routeOverrides || {},
         controllerSettings = classDec.controllerSettings || {};

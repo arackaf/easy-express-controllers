@@ -13,3 +13,8 @@ controllers/books/Book.js
 controllers/publisher/publisherDetails.js
 tests/controllerOverrideTests.js
 tests/nestedRoutes.js
+controllers2/books/Foo.js
+tests/pathOverrides.js
+util/decorators.js
+util/parameterSniffer.js
+util/createController.js
