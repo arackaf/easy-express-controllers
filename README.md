@@ -40,7 +40,21 @@ class Person{
 var easyControllers = require('easy-express-controllers').easyControllers;
 easyControllers.createController(app, 'person');
 ```
-The code above will require `person.js` from under a root-level `controllers` directory.  Eventually this base path will be configurable.
+The code above will require `person.js` from under a root-level `controllers` directory.
+
+This code gets to the root controllers directory in part with `path.dirname('.')` which is equivalent to `process.cwd()`.  This can easily be wrong depending on which directory your app was launched **from**.  If you can't, or don't want to rely on this being correct, you can pass in a third argument of an object literal.  If the object has a `__dirname` property, then that will be used in place of `path.dirname('.')`.  The object literal can *also* have a `controllerPath` property which overrides the default value of just `'controllers'`; it should be the **relative** path from the root of your application to your controllers directory, or a **relative** path from the overridden `__dirname` value you passed in, described above, to your controllers directory.
+
+For example, if for whatever reason you're running `createController` from a module one level beneath the root, and pointing to a root level directory called `controllers2` then this code will work
+
+```javascript
+easyControllers.createController(app, 'books/foo', { __dirname: __dirname, controllerPath: '../controllers2' });
+```
+
+Or of course this would also work under the same circumstances, assuming `process.cwd` could be used.
+
+```javascript
+easyControllers.createController(app, 'books/foo', { controllerPath: 'controllers2' });
+```
 
 Soon there will also be a mechanism to have this utility walk an entire directory and create all controllers for you.
 
@@ -100,8 +114,5 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 ## Future features ##
 
 - automatic controller generation by walking existing files.
-- configurable root for all controllers, instead of hard coding to `/controllers`.
-- allow custom routes to dump the `/{controller}` route
-
 
 
