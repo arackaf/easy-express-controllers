@@ -13,7 +13,10 @@
                 //contentType: 'application/json',
                 data: { name: 'Adam Rackis Post' },
                 dataType: 'json',
-                method: 'POST'
+                method: 'POST',
+                success: function(resp){
+                    console.log(resp.saved);
+                }
             });
         }
 
@@ -23,7 +26,10 @@
                 contentType: 'application/json',
                 data: { name: 'Adam Rackis Get' },
                 dataType: 'json',
-                method: 'GET'
+                method: 'GET',
+                success: function(resp){
+                    console.log(resp.name);
+                }
             });
         }
 
