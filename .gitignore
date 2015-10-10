@@ -18,3 +18,5 @@ tests/pathOverrides.js
 util/decorators.js
 util/parameterSniffer.js
 util/createController.js
+karmaTests/coreRoutingTests.js
+karmaTests/karmaTestSetup.js

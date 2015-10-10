@@ -1,9 +1,5 @@
 describe('Controller routing tests', function(){
 
-    before(function(){
-        easyControllers.createController(app, 'person');
-    });
-
     it('routes default get paths', function(done){
         utils.getAndCheck('http://localhost:3000/person/details', { name: 'Adam Get' }, done, obj => assert.equal(obj.name, 'Adam'));
     });

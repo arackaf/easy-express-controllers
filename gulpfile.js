@@ -17,6 +17,10 @@ gulp.task('initial-transpile', function () {
 
 gulp.task('test', function () {
     require('./testUtil/testSetup');
+	easyControllers.createController(app, 'person');
+	easyControllers.createController(app, 'globalcontroller');
+	easyControllers.createController(app, 'publisher/publisherDetails');
+	easyControllers.createController(app, 'books/book');
 
     gulp.src('tests/**/!(*-es6.js)') //we don't want es6 files - just the transpiled results
         .pipe(mocha())
@@ -24,9 +28,8 @@ gulp.task('test', function () {
 
 	function mochaTestsDone(){
 		var files = [
-			"node_modules/chai/chai.js",
 			"testUtil/jquery-2.1.4.min.js",
-			"karmaTests/uiTests.js"
+			'karmaTests/**/!(*-es6.js)'
 		];
 
 		gulp.src(files) //we don't want es6 files - just the transpiled results

@@ -1,9 +1,5 @@
 describe('Nested routes tests', function() {
 
-    before(function () {
-        easyControllers.createController(app, 'books/book');
-    });
-
     it('routes default get paths', function (done) {
         utils.getAndCheck('http://localhost:3000/books/book/details', {}, done, obj => assert.isTrue(obj.received));
     });

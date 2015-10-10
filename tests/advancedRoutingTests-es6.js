@@ -1,9 +1,5 @@
 describe('Advanced routing tests', function() {
 
-    before(function () {
-        easyControllers.createController(app, 'globalcontroller');
-    });
-
     it('routes default get paths', function (done) {
         utils.getAndCheck('http://localhost:3000/globalRoute1', { }, done, obj => assert.isTrue(obj.received));
     });

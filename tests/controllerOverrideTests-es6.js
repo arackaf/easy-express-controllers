@@ -1,9 +1,5 @@
 describe('Nested routes tests', function() {
 
-    before(function () {
-        easyControllers.createController(app, 'publisher/publisherDetails');
-    });
-
     it('routes default get paths when controller path overridden', function (done) {
         utils.getAndCheck('http://localhost:3000/publisher/details', {}, done, obj => assert.isTrue(obj.received));
     });

@@ -4,11 +4,13 @@ var assert = require('chai').assert;
 var request = require('request');
 var bodyParser = require('body-parser');
 var expressController = require('../index');
+var cors = require('cors');
 
 app.use(bodyParser.json());       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
     extended: true
 }));
+app.use(cors());
 
 global.server = app.listen(3000);
 

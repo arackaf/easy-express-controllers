@@ -16,6 +16,7 @@
   "devDependencies": {
     "body-parser": "^1.13.2",
     "chai": "^3.3.0",
+    "cors": "^2.7.1",
     "express": "4.x",
     "gulp": "^3.9.0",
     "gulp-babel": "~5.1.0",
