@@ -111,6 +111,8 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 }));
 ```
 
+**NOTE 2**: The parameter parsing works by analyzing the stringified method in question.  Obviously this is not minification safe.  A future version might provide for a way allowing the parameters to be sniffed prior to minification, and saved to an external file for subsequent dynamic loading.  In the interim ensure that your controllers are not minified, at least if you plan to use parameter sniffing.
+
 ## Future features ##
 
 - automatic controller generation by walking existing files.
