@@ -22,3 +22,4 @@ karmaTests/coreRoutingTests.js
 karmaTests/karmaTestSetup.js
 gulpfile.js
 testUtil/karmaTestSetup.js
+tests/sinonDiscoveryTests.js
