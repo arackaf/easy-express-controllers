@@ -29,7 +29,8 @@
     "karma-chrome-launcher": "^0.1.12",
     "karma-mocha": "^0.1.10",
     "mocha": "^2.3.3",
-    "request": "^2.64.0"
+    "request": "^2.64.0",
+    "sinon": "^1.17.1"
   },
   "dependencies": {
     "extend": "^3.0.0"
