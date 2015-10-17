@@ -25,3 +25,4 @@ testUtil/karmaTestSetup.js
 tests/sinonDiscoveryTests.js
 util/createAllControllers.js
 tests/sinonAndProxyquireDiscoveryTests.js
+tests/createAllControllersTests.js

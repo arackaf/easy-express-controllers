@@ -35,15 +35,6 @@ describe('sinon discovery tests', function(){
         verifyCreateControllerSpyCalls(spy, [['a'], ['b'], ['c', overrides]]);
     });
 
-    it('should stub correctly', function(){
-        var spy = sinon.spy(f);
-        var createAllControllers = proxyquire('../util/createAllControllers', { './createController': spy });
-
-        createAllControllers();
-
-        verifyCreateControllerSpyCalls(spy, [['a/b/c']]);
-    });
-
     function verifyCreateControllerSpyCalls(spy, calls){
         assert.equal(spy.callCount, calls.length);
         let callsToVerify = calls.map((c, i) => spy.getCall(i));
