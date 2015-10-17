@@ -3,14 +3,18 @@ var fs = require('fs');
 var path = require('path');
 
 function descendAndCall(app, basePath, config, overrides, subDirectory = '') {
-    let files = fs.readdirSync(basePath);
+    let adjustedBasePath = basePath + (subDirectory ? `/${subDirectory}` : '');
+    let files = fs.readdirSync(adjustedBasePath);
     config = Object.assign({ fileTest: () => true }, config);
 
     files.forEach(f => {
-        if (!/.js$/i.test(f)) return;
-        if (!config.fileTest(f)) return;
-
-        createController(app, f.replace('.js', ''), overrides);
+        if (fs.statSync(`${adjustedBasePath}/${f}`).isDirectory()){
+            descendAndCall(app, basePath, config, overrides, subDirectory + `${f}/`);
+        } else {
+            if (!/.js$/i.test(f)) return;
+            if (!config.fileTest(f)) return;
+            createController(app, subDirectory + f.replace('.js', ''), overrides);
+        }
     });
 }
 

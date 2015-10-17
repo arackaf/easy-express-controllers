@@ -33,6 +33,40 @@ describe('creare all controllers tests', function(){
         utils.verifyCreateControllerSpyCalls(spy, [['class1', overrides]]);
     });
 
+    it('should work with 2 levels', function(){
+        var spy = sinon.spy(f);
+        var createAllControllers = proxyquire('../util/createAllControllers', { './createController' : spy });
+        var overrides = { controllerPath: './createAllControllersTest4' };
+
+        createAllControllers(app, null, overrides);
+
+        let calls = [
+            ['class1', overrides],
+            ['level2/classa', overrides],
+            ['level2/classb', overrides]
+        ];
+        utils.verifyCreateControllerSpyCalls(spy, calls);
+    });
+
+    it('should work with 3 levels', function(){
+        var spy = sinon.spy(f);
+        var createAllControllers = proxyquire('../util/createAllControllers', { './createController' : spy });
+        var overrides = { controllerPath: './createAllControllersTest5' };
+
+        createAllControllers(app, null, overrides);
+
+        let calls = [
+            ['class1', overrides],
+            ['level2/classa', overrides],
+            ['level2/classb', overrides],
+            ['level2/level3/classi', overrides],
+            ['level2/level3/classii', overrides],
+            ['level2/level3/classiii', overrides]
+        ];
+        utils.verifyCreateControllerSpyCalls(spy, calls);
+    });
+
+
     function f(){
     }
 
