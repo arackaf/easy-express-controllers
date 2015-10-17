@@ -1,4 +1,5 @@
 var sinon = require('sinon');
+var proxyquire = require('proxyquire');
 
 describe('sinon discovery tests', function(){
 
@@ -32,6 +33,15 @@ describe('sinon discovery tests', function(){
         spy(app, 'b');
 
         verifyCreateControllerSpyCalls(spy, [['a'], ['b'], ['c', overrides]]);
+    });
+
+    it('should stub correctly', function(){
+        var spy = sinon.spy(f);
+        var createAllControllers = proxyquire('../util/createAllControllers', { './createController': spy });
+
+        createAllControllers();
+
+        verifyCreateControllerSpyCalls(spy, [['a/b/c']]);
     });
 
     function verifyCreateControllerSpyCalls(spy, calls){

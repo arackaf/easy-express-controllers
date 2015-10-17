@@ -23,3 +23,5 @@ karmaTests/karmaTestSetup.js
 gulpfile.js
 testUtil/karmaTestSetup.js
 tests/sinonDiscoveryTests.js
+util/createAllControllers.js
+tests/sinonAndProxyquireDiscoveryTests.js
