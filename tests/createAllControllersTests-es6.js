@@ -66,6 +66,24 @@ describe('creare all controllers tests', function(){
         utils.verifyCreateControllerSpyCalls(spy, calls);
     });
 
+    it('should work with 3 levels and properly exclude es6 files', function(){
+        var spy = sinon.spy(f);
+        var createAllControllers = proxyquire('../util/createAllControllers', { './createController' : spy });
+        var overrides = { controllerPath: './createAllControllersTest6' };
+
+        createAllControllers(app, { fileTest: f => !/-es6\.js$/i.test(f) }, overrides);
+
+        let calls = [
+            ['class1', overrides],
+            ['level2/classa', overrides],
+            ['level2/classb', overrides],
+            ['level2/level3/classi', overrides],
+            ['level2/level3/classii', overrides],
+            ['level2/level3/classiii', overrides]
+        ];
+        utils.verifyCreateControllerSpyCalls(spy, calls);
+    });
+
 
     function f(){
     }
