@@ -28,8 +28,6 @@ gulp.task('test', function () {
 		.on('end', mochaTestsDone);
 
 	function mochaTestsDone(){
-		server.close();
-		return; //turning off Karma tests for now.
 		let filesToLoad = [
 				'testUtil/jquery-2.1.4.min.js', //for $.ajax
 				'testUtil/karmaTestSetup.js' //resets my utils global with client-side code to run and verify my paths with $.ajax
@@ -37,7 +35,8 @@ gulp.task('test', function () {
 			blackList = [
 				'parameterSnifferTests.js',
 				'requestDiscoveryTests.js',
-				'sinonDiscoveryTests.js'
+				'sinonDiscoveryTests.js',
+				'createAllControllersTests.js'
 			].map(f => f.toLowerCase());
 
 		let allTestFiles = fs.readdirSync('./tests');
