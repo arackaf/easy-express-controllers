@@ -11,7 +11,8 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 
 app.listen(3001);
 
-easyControllers.createController(app, 'person');
+//easyControllers.createController(app, 'person');
+easyControllers.createAllControllers(app, { fileTest: f => !/-es6\.js$/i.test(f) });
 
 app.get('/', function (request, response) {
     response.sendFile(path.join(__dirname + '/runner.htm'));

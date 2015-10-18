@@ -1,6 +1,7 @@
 'use strict';
 
 var createController = require('./util/createController');
+var createAllControllers = require('./util/createAllControllers');
 
 var _require = require('./util/decorators');
 
@@ -14,7 +15,8 @@ var route = _require.route;
 var nonRoutable = _require.nonRoutable;
 
 var easyControllers = {
-    createController: createController
+    createController: createController,
+    createAllControllers: createAllControllers
 };
 
 module.exports = {

@@ -1,4 +1,5 @@
 var createController = require('./util/createController');
+var createAllControllers = require('./util/createAllControllers');
 var {
     controller,
     httpGet,
@@ -11,7 +12,8 @@ var {
 } = require('./util/decorators');
 
 var easyControllers = {
-    createController
+    createController,
+    createAllControllers
 };
 
 module.exports = {
