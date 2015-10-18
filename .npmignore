@@ -9,9 +9,9 @@ controllers2
 tests
 testUtil
 transpile
+.idea
 gulpfile-es6.js
 gulpfile.js
-index-es6.js
 karma.conf.js
 runner.htm
 runTestControllers-es6.js
