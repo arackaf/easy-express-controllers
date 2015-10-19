@@ -56,7 +56,21 @@ Or of course this would also work under the same circumstances, assuming `proces
 easyControllers.createController(app, 'books/foo', { controllerPath: 'controllers2' });
 ```
 
-Soon there will also be a mechanism to have this utility walk an entire directory and create all controllers for you.
+To have the utility walk your directory tree and create all controllers for you, you can also call `createAllControllers`
+
+```javascript
+easyControllers.createAllControllers(app);
+```
+
+This sniffs out all js files at any level under your controllers directory, and calls `createController` for you.  By default, only `.js` files will be processed; if your es6 transpiled files are named with a `.es6` extension (or something else that's not `.js` then you'll be all set.  If your ES6 files have a .js extension, then you can pass a second argument to `createAllControllers` to specify which files to exclude, like so
+
+```javascript
+easyControllers.createAllControllers(app, { fileTest: f => !/-es6\.js$/i.test(f) });
+```
+
+which of course will skip processing for all files that end in `-es6.js`.
+
+`createAllControllers` also optionally accepts a third argument which is precisely the same as the options object that `createController` receives, with `__dirname` and `controllerPath` properties.
 
 ## Class methods and routes ##
 
@@ -115,6 +129,6 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 
 ## Future features ##
 
-- automatic controller generation by walking existing files.
+- More configuration options
 
 
