@@ -62,7 +62,7 @@ To have easy-express-controllers walk your directory tree and create all control
 easyControllers.createAllControllers(app);
 ```
 
-This sniffs out all js files at any level under your controllers directory, and calls `createController` for you.  By default, only `.js` files will be processed; if your es6 transpiled files are named with a `.es6` extension (or something else that's not `.js`) then you'll be all set.  If your ES6 files have a .js extension, then you can pass a config object as your second argumentwith a fileTest property specifying which files to process, like so
+This sniffs out all js files at any level under your controllers directory, and calls `createController` for you.  By default, only `.js` files will be processed; if your es6 transpiled files are named with a `.es6` extension (or something else that's not `.js`) then you'll be all set.  If your ES6 files have a .js extension, then you can pass a config object as your second argumentwith a `fileTest` property specifying which files to process, like so
 
 ```javascript
 easyControllers.createAllControllers(app, { fileTest: f => !/-es6\.js$/i.test(f) });
