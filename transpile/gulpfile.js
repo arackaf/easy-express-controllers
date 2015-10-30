@@ -26,7 +26,7 @@ gulp.task('default', function() {
                         this.emit('end');
                     }
                 }))
-                .pipe(babel({ stage: 1 }))
+                .pipe(babel({ presets: ['babel-preset-es2015'], plugins: ['transform-decorators', 'transform-es2015-classes'] }))
                 .pipe(rename(function (path) {
                     path.basename = path.basename.replace(/-es6$/, '');
                 }))
