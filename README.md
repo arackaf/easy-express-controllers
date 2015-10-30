@@ -2,6 +2,8 @@
 
 Adds traditional MVC style controller support to Express with ES6 class, and ES-next decorators.
 
+**Note:** The decorators used in this project are from the old proposal, as transpiled by Babel 5.x, and have not yet been updated for Babel 6
+
 For example
 
 ```javascript
