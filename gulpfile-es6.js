@@ -5,6 +5,7 @@ var gulp = require('gulp'),
 	babel = require('gulp-babel'),
 	karma = require("gulp-karma"),
 	plumber = require('gulp-plumber'),
+	notify = require('gulp-notify'),
 	fs = require('fs');
 
 gulp.task('initial-transpile', function () {
