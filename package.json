@@ -16,6 +16,7 @@
   "devDependencies": {
     "babel-plugin-transform-class-properties": "^6.0.2",
     "babel-plugin-transform-decorators": "^6.0.2",
+    "babel-plugin-transform-strict-mode": "^6.0.2",
     "babel-preset-es2015": "^6.0.11",
     "body-parser": "^1.13.2",
     "chai": "^3.3.0",
