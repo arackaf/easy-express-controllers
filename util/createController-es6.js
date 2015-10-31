@@ -1,4 +1,3 @@
-var extend = require('extend');
 var { getParameterNames } = require('./parameterSniffer');
 var path = require('path');
 
@@ -51,7 +50,7 @@ function getRequestValues(req){
         query = typeof req.query === 'object' ? req.query : {},
         params = typeof req.params === 'object' ? req.params : {};
 
-    return { requestValues: extend({}, body, query, params), body, query, params };
+    return { requestValues: Object.assign({}, body, query, params), body, query, params };
 }
 
 function caseInsensitiveLookup(name, body, query, params){
