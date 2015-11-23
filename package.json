@@ -14,6 +14,7 @@
   },
   "homepage": "https://github.com/arackaf/express-controllers",
   "devDependencies": {
+    "babel-plugin-syntax-decorators": "^6.0.14",
     "babel-plugin-transform-class-properties": "^6.0.2",
     "babel-plugin-transform-decorators": "^6.0.2",
     "babel-plugin-transform-strict-mode": "^6.0.2",
@@ -39,6 +40,5 @@
     "request": "^2.64.0",
     "sinon": "^1.17.1"
   },
-  "dependencies": {
-  }
+  "dependencies": {}
 }
