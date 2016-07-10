@@ -14,6 +14,7 @@ var acceptVerbs = _require.acceptVerbs;
 var route = _require.route;
 var nonRoutable = _require.nonRoutable;
 
+
 var easyControllers = {
     createController: createController,
     createAllControllers: createAllControllers
