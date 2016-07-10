@@ -8,8 +8,8 @@ class publisherDetails {
     }
     @httpPost
     @route('/global-path-publisher/:userId')
-    foo(USERID, X, Y){
-        this.send({ userId: USERID, x: X, y: Y });
+    foo({ userId, x, y }){
+        this.send({ userId, x, y });
     }
 }
 
