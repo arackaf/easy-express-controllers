@@ -33,7 +33,6 @@ function createController(app, controllerPath, overrides = { }){
 function createRouteCallback(classDec, method){
     return function(req, res){
         let { allRequestValues, body, query, params } = getRequestValues(req);
-        console.log(allRequestValues, method);
 
         let obj = new classDec();
         obj.request = req;
