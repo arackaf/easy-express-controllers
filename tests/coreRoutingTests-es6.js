@@ -28,8 +28,8 @@ describe('Controller routing tests', function(){
         utils.postAndCheck('http://localhost:3000/person/setStuffA', { x: 1, y: 2, z: 3 }, done, obj => assert.deepEqual(obj, { x: 1, y: 2, z: 3 }));
     });
 
-    it('sets parameter values for POST case insensitive', function(done){
-        utils.postAndCheck('http://localhost:3000/person/setStuffA', { X: 1, Y: 2, Z: 3 }, done, obj => assert.deepEqual(obj, { x: 1, y: 2, z: 3 }));
+    it('sets parameter values for POST', function(done){
+        utils.postAndCheck('http://localhost:3000/person/setStuffA', { x: 1, y: 2, z: 3 }, done, obj => assert.deepEqual(obj, { x: 1, y: 2, z: 3 }));
     });
 
     it('routes custom paths', function(done){
@@ -44,16 +44,16 @@ describe('Controller routing tests', function(){
         utils.getAndCheck('http://localhost:3000/person/x/12/z/13', { }, done, obj => assert.deepEqual(obj, { userId: '12', parentId: '13' }));
     });
 
-    it('routes custom paths with parameters passed case insensitive', function(done){
+    it('routes custom paths with parameters passed', function(done){
         utils.getAndCheck('http://localhost:3000/person/x2/12/z2/13', { }, done, obj => assert.deepEqual(obj, { userId: '12', parentId: '13' }));
     });
 
-    it('routes custom paths with parameters passed case insensitive precedence 1', function(done){
-        utils.getAndCheck('http://localhost:3000/person/x2/12/z2/13', { USERID: 99 }, done, obj => assert.deepEqual(obj, { userId: '12', parentId: '13' }));
+    it('routes custom paths with parameters passed precedence 1', function(done){
+        utils.getAndCheck('http://localhost:3000/person/x2/12/z2/13', { userId: 99 }, done, obj => assert.deepEqual(obj, { userId: '12', parentId: '13' }));
     });
 
-    it('routes custom paths with parameters passed case insensitive precedence 2', function(done){
-        utils.getAndCheck('http://localhost:3000/person/x2/12/z2/13?USERID=98', { USERID: 99 }, done, obj => assert.deepEqual(obj, { userId: '12', parentId: '13' }));
+    it('routes custom paths with parameters passed precedence 2', function(done){
+        utils.getAndCheck('http://localhost:3000/person/x2/12/z2/13?userId=98', { userId: 99 }, done, obj => assert.deepEqual(obj, { userId: '12', parentId: '13' }));
     });
 
     it('posts to custom paths', function(done){

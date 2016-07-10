@@ -7,8 +7,8 @@ class Book {
     }
     @httpPost
     @route('/global-path-foo/:userId')
-    foo(USERID, X, Y){
-        this.send({ userId: USERID, x: X, y: Y });
+    foo({ userId, x, y }){
+        this.send({ userId, x, y });
     }
 }
 

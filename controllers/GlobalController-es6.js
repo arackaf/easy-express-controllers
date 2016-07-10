@@ -16,7 +16,7 @@ class GlobalController {
     }
     @httpPost
     @route('/globalRoute3/:userId')
-    lolo(USERID, X, Y){
+    lolo({ USERID, X, Y }){
         this.send({ userId: USERID, x: X, y: Y });
     }
 }

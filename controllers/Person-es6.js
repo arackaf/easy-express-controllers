@@ -8,11 +8,11 @@ class Person{
     save(){
         this.send({ saved: true });
     }
-    getStuffA(a, b, c){
+    getStuffA({ a, b, c }){
         this.send({ a, b, c });
     }
     @httpPost
-    setStuffA(x, y, z){
+    setStuffA({ x, y, z }){
         this.send({ x, y, z });
     }
     @route('x/y/z')
@@ -20,11 +20,11 @@ class Person{
         this.send({ madeIt: true });
     }
     @route('x/:userId/z/:parentId')
-    customPathWithParameters(userId, parentId){
+    customPathWithParameters({ userId, parentId }){
         this.send({ userId, parentId });
     }
-    @route('x2/:USERID/z2/:PARENTID')
-    customPathWithParameters2(userId, parentId){
+    @route('x2/:userId/z2/:parentId')
+    customPathWithParameters2({ userId, parentId }){
         this.send({ userId, parentId });
     }
     @route('z/x')
@@ -39,7 +39,7 @@ class Person{
     }
     @httpPost
     @route('z/:a/x/:b')
-    customPathWithPost3(a, b, c){
+    customPathWithPost3({ a, b, c }){
         this.send({ a, b, c });
     }
     @nonRoutable
