@@ -2,8 +2,6 @@
 
 Adds traditional MVC style controller support to Express with ES6 class, and ES-next decorators.
 
-**Note:** The decorators used in this project are from the old proposal, as transpiled by Babel 5.x, and have not yet been updated for Babel 6
-
 For example
 
 ```javascript
@@ -18,13 +16,13 @@ class Person{
         this.send({ saved: true });
     }
     @httpPost
-    setStuff(x, y, z){
+    setStuff({ x, y, z }){
         //These parameter values will be parsed and set for you.
         //No need to parse request.body or request.query - just use them
         this.send({ x, y, z });
     }
     @route('billing/:userId/:billingId')
-    getUserBillingInfo(userId, billingId){
+    getUserBillingInfo({ userId, billingId }){
         this.send({ userId, parentId });
     }
     @nonRoutable
@@ -100,7 +98,7 @@ If you'd like to set the complete path for a controller action, overriding even 
 ```javascript
 @httpPost
 @route('/some-global-path/:userId')
-about(userId){
+about({ userId }){
 }
 ```
 
@@ -114,7 +112,10 @@ Methods default to GET.  To override this, you can add one or more decorators of
 
 Inside the controller method the following methods from the response object will be directly available through `this`: `send`, `sendFile`, `json`, `jsonp`.  The original request and response objects are also available through `this.request` and `this.response` respectively.
 
-Method parameters are parsed from the request and set for you.  Matching values are added if found on `request.params`, `request.query`, and `request.body` in that order of precedence: a matching value from `request.params` will be passed over a matching value from `request.body`. This will not work with ES6 default parameter values yet, but Node doesn't even support them at the moment.  The search for a matching parameter name is case insensitive.
+## Using parameters in route methods ##
+
+Methods are passed an object with all values from `request.params`, `request.query`, and `request.body` in that order of precedence: a value from `request.params` override a matching value from `request.body`. You can either accept the object as is, or destructure what you need right in the method definition,
+ as the examples above do.
 
 **NOTE**: to ensure parameter parsing works make sure you have your middleware setup appropriately:
 
@@ -127,10 +128,12 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 }));
 ```
 
-**NOTE 2**: The parameter parsing works by analyzing the stringified method in question.  Obviously this is not minification safe.  A future version might provide for a way allowing the parameters to be sniffed prior to minification, and saved to an external file for subsequent dynamic loading.  In the interim ensure that your controllers are not minified, at least if you plan to use parameter sniffing.
+## Setting up Babel 6 ##
 
-## Future features ##
+Use the `babel-plugin-transform-decorators-legacy` plugin to handle decorators.  If using Gulp, your call may look like this
 
-- automatic controller generation by walking existing files.
+```javascript
+.pipe(babel({ presets: ['babel-preset-es2015'], plugins: ['transform-decorators-legacy'] }))
+```
 
 
