@@ -4,8 +4,13 @@ function createController(app, controllerPath, overrides = { }){
 
     let router = require('express').Router(),
         classBasePath = path.relative(__dirname, path.resolve(overrides.__dirname || path.dirname('.'), overrides.controllerPath || "controllers")).replace(/\\/g, '/'),
-        classDec = require(`${classBasePath}/${controllerPath}`),
-        routeOverrides = classDec.routeOverrides || {},
+        classDec = require(`${classBasePath}/${controllerPath}`);
+
+    if (typeof classDec === 'object' && typeof classDec.default === 'function'){
+        classDec = classDec.default;
+    }
+
+    let routeOverrides = classDec.routeOverrides || {},
         controllerSettings = classDec.controllerSettings || {};
 
     Object.getOwnPropertyNames(classDec.prototype).forEach(method => {
