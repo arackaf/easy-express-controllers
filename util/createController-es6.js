@@ -16,11 +16,12 @@ function createController(app, controllerPath, overrides = { }){
     Object.getOwnPropertyNames(classDec.prototype).forEach(method => {
         if (method === 'constructor' || typeof classDec.prototype[method] !== 'function') return;
 
-        let methodOverrides = routeOverrides[method] || { };
+        let methodOverrides = routeOverrides[method] || { },
+            defaultVerb = controllerSettings.defaultVerb ? [controllerSettings.defaultVerb] : null;
 
         if (methodOverrides.nonRoutable) return;
 
-        let verbsToUse = methodOverrides.httpMethod || ['get'],
+        let verbsToUse = methodOverrides.httpMethod || defaultVerb || ['get'],
             actionPath = methodOverrides.route || method;
 
         if (actionPath[0] == '/'){

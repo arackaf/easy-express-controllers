@@ -1,6 +1,6 @@
-function controller({ path }){
+function controller({ path, defaultVerb = 'get' } = {}){
     return function (target, name, decorator){
-        target.controllerSettings = { path };
+        target.controllerSettings = { path, defaultVerb };
     }
 }
 

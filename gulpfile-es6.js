@@ -57,6 +57,7 @@ gulp.task('test', function () {
 	easyControllers.createController(app, 'globalcontroller');
 	easyControllers.createController(app, 'publisher/publisherDetails');
 	easyControllers.createController(app, 'books/book');
+	easyControllers.createController(app, 'books/bookDefaultPost');
 
 	gulp.src('tests/**/!(*-es6.js)') //we don't want es6 files - just the transpiled results
 		.pipe(mocha())

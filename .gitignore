@@ -26,3 +26,5 @@ tests/sinonDiscoveryTests.js
 util/createAllControllers.js
 tests/sinonAndProxyquireDiscoveryTests.js
 tests/createAllControllersTests.js
+controllers/books/BookDefaultPost.js
+tests/verbOverrides.js

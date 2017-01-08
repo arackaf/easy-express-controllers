@@ -1,16 +1,16 @@
 const { httpGet, httpPut, httpDelete, httpPost, acceptVerbs, route, nonRoutable, controller } = require('../../index');
 
-@controller()
-class Book {
-    constructor(){ }
+@controller({defaultVerb: 'post'})
+export default class Book {
     details(){
         this.send({ received: true });
     }
     @httpPost
-    @route('/global-path-book/:userId')
-    foo({ userId, x, y }){
-        this.send({ userId, x, y });
+    foo({ x }){
+        this.send({ x });
+    }
+    @httpGet
+    foo2({ x }){
+        this.send({ x });
     }
 }
-
-export default Book;
