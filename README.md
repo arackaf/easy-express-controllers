@@ -108,6 +108,27 @@ the path `/some-global-path/:userId` will trigger the method above, regardless o
 
 Methods default to GET.  To override this, you can add one or more decorators of `@httpPost`, `@httpGet`, `@httpPut` and `@httpDelete`, or add multiple verbs at one time through `@acceptVerbs`, which accepts an array, for example `@acceptVerbs(['put', 'delete'])`.
 
+## Setting a class-level default path verb ##
+
+If you want your class methods to default to something other than GET—while still being able to be set explicitly, as normal—use the `defaultVerb` property on the `@controller` decorator.
+
+```javascript
+@controller({ defaultVerb: 'post' })
+export default class Book {
+    details(){
+        this.send({ received: true });
+    }
+    @httpPost
+    foo({ x }){
+        this.send({ x });
+    }
+    @httpGet
+    foo2({ x }){
+        this.send({ x });
+    }
+}
+```
+
 ## Handling Routes ##
 
 Inside the controller method the following methods from the response object will be directly available through `this`: `send`, `sendFile`, `json`, `jsonp`.  The original request and response objects are also available through `this.request` and `this.response` respectively.
