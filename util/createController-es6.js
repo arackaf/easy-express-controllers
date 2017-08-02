@@ -22,7 +22,9 @@ function createController(app, controllerPath, overrides = { }){
         if (methodOverrides.nonRoutable) return;
 
         let verbsToUse = methodOverrides.httpMethod || defaultVerb || ['get'],
-            actionPath = methodOverrides.route || method;
+            actionPath = methodOverrides.route;
+            
+        if (actionPath == null) actionPath = verbsToUse.includes(method) ? '' : method;
 
         if (actionPath[0] == '/'){
             //global path - add right to express
