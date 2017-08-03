@@ -5,9 +5,13 @@ class NewRouting {
         this.send({getReceived: true});
     }
 
-    @httpPost
     post(){
         this.send({postReceived: true});
+    }
+
+    @httpPost
+    delete(){
+        this.send({deleteReceived: true});
     }
 
     @httpPut

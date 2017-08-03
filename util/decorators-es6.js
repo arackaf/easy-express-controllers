@@ -20,6 +20,10 @@ function httpDelete(target, name, decorator){
     addVerbs('delete', target, name, decorator);
 }
 
+function httpPatch(target, name, decorator){
+    addVerbs('patch', target, name, decorator);
+}
+
 function acceptVerbs(verbs){
     return function(target, name, decorator){
         addVerbs(verbs, target, name, decorator);
@@ -66,12 +70,14 @@ function nonRoutable(target, name, decorator){
     target.constructor.routeOverrides[name].nonRoutable = true;
 }
 
+
 module.exports = {
     controller,
     httpGet,
     httpPost,
     httpPut,
     httpDelete,
+    httpPatch,
     acceptVerbs,
     route,
     nonRoutable

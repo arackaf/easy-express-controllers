@@ -1,5 +1,7 @@
 var path = require('path');
 
+const supportedVerbs = ['get', 'post', 'put', 'delete', 'patch'];
+
 function createController(app, controllerPath, overrides = { }){
 
     let router = require('express').Router(),
@@ -21,7 +23,9 @@ function createController(app, controllerPath, overrides = { }){
 
         if (methodOverrides.nonRoutable) return;
 
-        let verbsToUse = methodOverrides.httpMethod || defaultVerb || ['get'],
+        const conventionalVerb = supportedVerbs.includes(method) ? [method] : null;
+
+        let verbsToUse = methodOverrides.httpMethod || conventionalVerb || defaultVerb ||  ['get'],
             actionPath = methodOverrides.route;
             
         if (actionPath == null) actionPath = verbsToUse.includes(method) ? '' : method;

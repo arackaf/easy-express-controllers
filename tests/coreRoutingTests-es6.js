@@ -97,6 +97,10 @@ describe('Controller routing tests', function(){
         utils.postAndCheck('http://localhost:3000/NewRouting/', { }, done, obj => assert.isTrue(obj.postReceived));
     });
 
+    it('overridden conventional route name', function(done){
+        utils.postAndCheck('http://localhost:3000/NewRouting/delete', { }, done, obj => assert.isTrue(obj.deleteReceived));
+    });
+
     it('empty route name', function(done){
         utils.putAndCheck('http://localhost:3000/NewRouting/', { }, done, obj => assert.isTrue(obj.putReceived));
     });
