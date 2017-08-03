@@ -21,7 +21,7 @@ global.easyControllers = expressController.easyControllers;
 global.assert = assert;
 
 //forcing a different root __dirname and custom path to controllers directory
-easyControllers.createController(app, 'books/foo', { __dirname: __dirname, controllerPath: '../controllers2' });
+easyControllers.createController(app, 'books/Foo', { __dirname: __dirname, controllerPath: '../controllers2' });
 
 function postAndCheck(uri, data, done, check, options){
     runAndCheck(uri, data, 'post', done, check);

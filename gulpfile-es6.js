@@ -3,7 +3,7 @@ var gulp = require('gulp'),
 	mocha = require('gulp-mocha'),
 	gprint = require('gulp-print'),
 	babel = require('gulp-babel'),
-	karma = require("gulp-karma"),
+	karma = require('karma').Server,
 	plumber = require('gulp-plumber'),
 	notify = require('gulp-notify'),
 	fs = require('fs');
@@ -53,11 +53,11 @@ gulp.task('transpile-watch', function() {
 
 gulp.task('test', function () {
 	require('./testUtil/testSetup');
-	easyControllers.createController(app, 'person');
-	easyControllers.createController(app, 'globalcontroller');
+	easyControllers.createController(app, 'Person');
+	easyControllers.createController(app, 'GlobalController');
 	easyControllers.createController(app, 'publisher/publisherDetails');
-	easyControllers.createController(app, 'books/book');
-	easyControllers.createController(app, 'books/bookDefaultPost');
+	easyControllers.createController(app, 'books/Book');
+	easyControllers.createController(app, 'books/BookDefaultPost');
 
 	gulp.src('tests/**/!(*-es6.js)') //we don't want es6 files - just the transpiled results
 		.pipe(mocha())
@@ -82,7 +82,7 @@ gulp.task('test', function () {
 		gulp.src(filesToLoad)
 			.pipe(karma({
 				configFile: __dirname + "/karma.conf.js",
-				action: "run"
+				singleRun: true
 			}))
 			.on('end', function(){ server.close(); });
 	}
