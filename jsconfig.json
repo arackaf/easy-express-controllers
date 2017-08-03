@@ -1,0 +1,11 @@
+{
+    "compilerOptions": {
+        "target": "esnext",
+        "baseUrl": "./src",
+        "jsx": "react",
+        "allowSyntheticDefaultImports": true,
+        "allowUnreachableCode": true,
+        "module": "es2015",
+        "experimentalDecorators": true
+    }
+}
