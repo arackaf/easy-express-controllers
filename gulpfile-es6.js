@@ -54,6 +54,7 @@ gulp.task('transpile-watch', function() {
 gulp.task('test', function () {
 	require('./testUtil/testSetup');
 	easyControllers.createController(app, 'Person');
+	easyControllers.createController(app, 'NewRouting');
 	easyControllers.createController(app, 'GlobalController');
 	easyControllers.createController(app, 'publisher/publisherDetails');
 	easyControllers.createController(app, 'books/Book');

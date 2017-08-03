@@ -88,4 +88,20 @@ describe('Controller routing tests', function(){
     utils.checkRoutesAndVerbs('http://localhost:3000/person/putToMe', ['put']);
     utils.checkRoutesAndVerbs('http://localhost:3000/person/putToMe2', ['put']);
     utils.checkRoutesAndVerbs('http://localhost:3000/person/deleteToMe', ['delete']);
+
+    it('routes to a default route name', function(done){
+        utils.getAndCheck('http://localhost:3000/NewRouting/', { }, done, obj => assert.isTrue(obj.getReceived));
+    });
+
+    it('posts to a default route name', function(done){
+        utils.postAndCheck('http://localhost:3000/NewRouting/', { }, done, obj => assert.isTrue(obj.postReceived));
+    });
+
+    it('empty route name', function(done){
+        utils.putAndCheck('http://localhost:3000/NewRouting/', { }, done, obj => assert.isTrue(obj.putReceived));
+    });
+
+    it('routes to a regular route name', function(done){
+        utils.getAndCheck('http://localhost:3000/NewRouting/foo', { }, done, obj => assert.isTrue(obj.fooReceived));
+    });
 });
