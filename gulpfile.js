@@ -55,6 +55,8 @@ gulp.task('test', function () {
 	require('./testUtil/testSetup');
 	easyControllers.createController(app, 'Person');
 	easyControllers.createController(app, 'NewRouting');
+	easyControllers.createController(app, 'NewRouting2');
+	easyControllers.createController(app, 'NewRouting3');
 	easyControllers.createController(app, 'GlobalController');
 	easyControllers.createController(app, 'publisher/publisherDetails');
 	easyControllers.createController(app, 'books/Book');

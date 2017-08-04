@@ -113,4 +113,41 @@ describe('Controller routing tests', function(){
     it('routes to a regular route name', function(done){
         utils.getAndCheck('http://localhost:3000/NewRouting/foo', { }, done, obj => assert.isTrue(obj.fooReceived));
     });
+
+    //all default conventional routes
+
+    it('all defaults - get', function(done){
+        utils.getAndCheck('http://localhost:3000/NewRouting2/', { }, done, obj => assert.isTrue(obj.getReceived));
+    });
+
+    it('all defaults - post', function(done){
+        utils.postAndCheck('http://localhost:3000/NewRouting2/', { }, done, obj => assert.isTrue(obj.postReceived));
+    });
+
+    it('all defaults - delete', function(done){
+        utils.deleteAndCheck('http://localhost:3000/NewRouting2/', { }, done, obj => assert.isTrue(obj.deleteReceived));
+    });
+
+    it('all defaults - put', function(done){
+        utils.putAndCheck('http://localhost:3000/NewRouting2/', { }, done, obj => assert.isTrue(obj.putReceived));
+    });
+
+    //all default conventional routes
+
+    it('all defaults overridden - get', function(done){
+        utils.getAndCheck('http://localhost:3000/NewRouting3/', { }, done, obj => assert.isTrue(obj.getReceived));
+    });
+
+    it('all defaults overridden - post', function(done){
+        utils.postAndCheck('http://localhost:3000/NewRouting3/', { }, done, obj => assert.isTrue(obj.postReceived));
+    });
+
+    it('all defaults overridden - delete', function(done){
+        utils.deleteAndCheck('http://localhost:3000/NewRouting3/', { }, done, obj => assert.isTrue(obj.deleteReceived));
+    });
+
+    it('all defaults overridden - put', function(done){
+        utils.putAndCheck('http://localhost:3000/NewRouting3/', { }, done, obj => assert.isTrue(obj.putReceived));
+    });
+
 });
