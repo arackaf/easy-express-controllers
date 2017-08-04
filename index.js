@@ -9,6 +9,7 @@ var _require = require('./util/decorators'),
     httpPost = _require.httpPost,
     httpPut = _require.httpPut,
     httpDelete = _require.httpDelete,
+    httpPatch = _require.httpPatch,
     acceptVerbs = _require.acceptVerbs,
     route = _require.route,
     nonRoutable = _require.nonRoutable;
@@ -25,6 +26,7 @@ module.exports = {
     httpPost: httpPost,
     httpPut: httpPut,
     httpDelete: httpDelete,
+    httpPatch: httpPatch,
     acceptVerbs: acceptVerbs,
     route: route,
     nonRoutable: nonRoutable
