@@ -1,6 +1,6 @@
 const { httpGet, httpPut, httpDelete, httpPost, acceptVerbs, route, nonRoutable } = require('../index');
 
-class NewRouting2 {
+class NewRouting3 {
     @httpPost
     @route('')
     get(){
@@ -26,4 +26,4 @@ class NewRouting2 {
     }
 }
 
-module.exports = NewRouting2;
+module.exports = NewRouting3;

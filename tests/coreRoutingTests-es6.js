@@ -150,4 +150,30 @@ describe('Controller routing tests', function(){
         utils.putAndCheck('http://localhost:3000/NewRouting3/', { }, done, obj => assert.isTrue(obj.putReceived));
     });
 
+    //exteneded decorators
+
+    it('exteneded decorators - get', function(done){
+        utils.getAndCheck('http://localhost:3000/ExtendedDecorators/get-test', { }, done, obj => assert.isTrue(obj.getReceived));
+    });
+
+    it('exteneded decorators - post', function(done){
+        utils.postAndCheck('http://localhost:3000/ExtendedDecorators/post-test', { }, done, obj => assert.isTrue(obj.postReceived));
+    });
+
+    it('exteneded decorators - delete', function(done){
+        utils.deleteAndCheck('http://localhost:3000/ExtendedDecorators/delete-test', { }, done, obj => assert.isTrue(obj.deleteReceived));
+    });
+
+    it('exteneded decorators - put', function(done){
+        utils.putAndCheck('http://localhost:3000/ExtendedDecorators/put-test', { }, done, obj => assert.isTrue(obj.putReceived));
+    });
+
+    it('exteneded decorators - patch', function(done){
+        utils.patchAndCheck('http://localhost:3000/ExtendedDecorators/patch-test', { }, done, obj => assert.isTrue(obj.patchReceived));
+    });
+
+    it('exteneded decorators - empty route', function(done){
+        utils.postAndCheck('http://localhost:3000/ExtendedDecorators', { }, done, obj => assert.isTrue(obj.postReceived));
+    });
+
 });

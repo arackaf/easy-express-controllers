@@ -57,6 +57,7 @@ gulp.task('test', function () {
 	easyControllers.createController(app, 'NewRouting');
 	easyControllers.createController(app, 'NewRouting2');
 	easyControllers.createController(app, 'NewRouting3');
+	easyControllers.createController(app, 'ExtendedDecorators');
 	easyControllers.createController(app, 'GlobalController');
 	easyControllers.createController(app, 'publisher/publisherDetails');
 	easyControllers.createController(app, 'books/Book');

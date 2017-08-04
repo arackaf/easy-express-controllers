@@ -6,6 +6,7 @@ var {
     httpPost,
     httpPut,
     httpDelete,
+    httpPatch,
     acceptVerbs,
     route,
     nonRoutable
@@ -23,6 +24,7 @@ module.exports = {
     httpPost,
     httpPut,
     httpDelete,
+    httpPatch,
     acceptVerbs,
     route,
     nonRoutable

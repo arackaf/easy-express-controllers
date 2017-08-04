@@ -4,24 +4,24 @@ function controller({ path, defaultVerb = 'get' } = {}){
     }
 }
 
-function httpGet(target, name, decorator){
-    addVerbs('get', target, name, decorator);
+function httpGet(routeName) {
+    return _applyUniversalHttpDecorator('get', routeName, arguments);
 }
 
-function httpPost(target, name, decorator){
-    addVerbs('post', target, name, decorator);
+function httpPost(routeName) {
+    return _applyUniversalHttpDecorator('post', routeName, arguments);
 }
 
-function httpPut(target, name, decorator){
-    addVerbs('put', target, name, decorator);
+function httpPut(routeName) {
+    return _applyUniversalHttpDecorator('put', routeName, arguments);
 }
 
-function httpDelete(target, name, decorator){
-    addVerbs('delete', target, name, decorator);
+function httpDelete(routeName) {
+    return _applyUniversalHttpDecorator('delete', routeName, arguments);
 }
 
-function httpPatch(target, name, decorator){
-    addVerbs('patch', target, name, decorator);
+function httpPatch(routeName) {
+    return _applyUniversalHttpDecorator('patch', routeName, arguments);
 }
 
 function acceptVerbs(verbs){
@@ -31,43 +31,50 @@ function acceptVerbs(verbs){
 }
 
 function addVerbs(verbs, target, name, decorator){
-    if (!target.constructor.routeOverrides){
-        target.constructor.routeOverrides = {};
-    }
-    if (!target.constructor.routeOverrides[name]){
-        target.constructor.routeOverrides[name] = { };
-    }
-    if (typeof target.constructor.routeOverrides[name].httpMethod === 'string'){
-        target.constructor.routeOverrides[name].httpMethod = [target.constructor.routeOverrides[name].httpMethod];
-    } else if (typeof target.constructor.routeOverrides[name].httpMethod === 'undefined'){
-        target.constructor.routeOverrides[name].httpMethod = [];
+    const overrides = _getOrCreateOverrides(target, name); 
+    if (typeof overrides.httpMethod === 'string'){
+        overrides.httpMethod = [overrides.httpMethod];
+    } else if (typeof overrides.httpMethod === 'undefined'){
+        overrides.httpMethod = [];
     }
     if (!Array.isArray(verbs)){
         verbs = [verbs];
     }
-    target.constructor.routeOverrides[name].httpMethod.push(...verbs);
+    overrides.httpMethod.push(...verbs);
 }
 
 function route(routeName){
     return function (target, name, decorator){
-        if (!target.constructor.routeOverrides){
-            target.constructor.routeOverrides = {};
-        }
-        if (!target.constructor.routeOverrides[name]){
-            target.constructor.routeOverrides[name] = { };
-        }
-        target.constructor.routeOverrides[name].route = routeName;
+        const overrides = _getOrCreateOverrides(target, name); 
+        overrides.route = routeName;
     }
 }
 
 function nonRoutable(target, name, decorator){
+    const overrides = _getOrCreateOverrides(target, name);   
+    overrides.nonRoutable = true;
+}
+
+function _applyUniversalHttpDecorator(verb, routeName, args){
+    if(args.length == 1){      
+        return function (target, name, decorator) {
+            addVerbs(verb, target, name, decorator);
+            route(routeName)(target, name, decorator);
+        };
+    }
+
+    addVerbs(verb, ...args);
+}
+
+function _getOrCreateOverrides(target, name){
     if (!target.constructor.routeOverrides){
         target.constructor.routeOverrides = {};
     }
     if (!target.constructor.routeOverrides[name]){
         target.constructor.routeOverrides[name] = { };
     }
-    target.constructor.routeOverrides[name].nonRoutable = true;
+
+    return target.constructor.routeOverrides[name];
 }
 
 

@@ -35,6 +35,10 @@ function putAndCheck(uri, data, done, check, options){
     runAndCheck(uri, data, 'put', done, check);
 }
 
+function patchAndCheck(uri, data, done, check, options){
+    runAndCheck(uri, data, 'patch', done, check);
+}
+
 function deleteAndCheck(uri, data, done, check, options){
     runAndCheck(uri, data, 'delete', done, check);
 }
@@ -56,7 +60,10 @@ function verbsAreRejected(uri, done, verbs){
 
     function runVerb(verb){
         return new Promise(res => {
-            request[verb](uri, {}, function (error, response, obj) {
+            let regVerb = verb;
+            if(regVerb == 'delete') regVerb = 'del';
+
+            request[regVerb](uri, {}, function (error, response, obj) {
                 assert.isTrue(new RegExp(`cannot ${verb}`, 'i').test(obj), `${uri} didn't fail for ${verb} but should have`); //this is how request handles requests for which the very is not defined....
                 res();
             });
@@ -92,6 +99,7 @@ global.utils = {
     postAndCheck,
     getAndCheck,
     putAndCheck,
+    patchAndCheck,
     deleteAndCheck,
     runAndCheck,
     verbsAreRejected,
