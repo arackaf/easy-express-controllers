@@ -17,7 +17,7 @@ class NewRouting {
     @httpPut
     @route('')
     xyz(){
-        this.send({putReceived: true});
+        this.send({putReceivedXyz: true});
     }
 
     foo(){

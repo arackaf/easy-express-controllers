@@ -65,6 +65,8 @@ gulp.task('test', function () {
 		.on('end', mochaTestsDone);
 
 	function mochaTestsDone(){
+		server.close();
+		return;
 		let filesToLoad = [
 				'testUtil/jquery-2.1.4.min.js', //for $.ajax
 				'testUtil/karmaTestSetup.js' //resets my utils global with client-side code to run and verify my paths with $.ajax

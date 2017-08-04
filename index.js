@@ -3,17 +3,15 @@
 var createController = require('./util/createController');
 var createAllControllers = require('./util/createAllControllers');
 
-var _require = require('./util/decorators');
-
-var controller = _require.controller;
-var httpGet = _require.httpGet;
-var httpPost = _require.httpPost;
-var httpPut = _require.httpPut;
-var httpDelete = _require.httpDelete;
-var acceptVerbs = _require.acceptVerbs;
-var route = _require.route;
-var nonRoutable = _require.nonRoutable;
-
+var _require = require('./util/decorators'),
+    controller = _require.controller,
+    httpGet = _require.httpGet,
+    httpPost = _require.httpPost,
+    httpPut = _require.httpPut,
+    httpDelete = _require.httpDelete,
+    acceptVerbs = _require.acceptVerbs,
+    route = _require.route,
+    nonRoutable = _require.nonRoutable;
 
 var easyControllers = {
     createController: createController,

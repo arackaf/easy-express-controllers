@@ -35,15 +35,15 @@ function _applyDecoratedDescriptor(target, property, decorators, descriptor, con
     return desc;
 }
 
-var _require = require('../index');
+var _require = require('../index'),
+    httpGet = _require.httpGet,
+    httpPut = _require.httpPut,
+    httpDelete = _require.httpDelete,
+    httpPost = _require.httpPost,
+    acceptVerbs = _require.acceptVerbs,
+    route = _require.route,
+    nonRoutable = _require.nonRoutable;
 
-var httpGet = _require.httpGet;
-var httpPut = _require.httpPut;
-var httpDelete = _require.httpDelete;
-var httpPost = _require.httpPost;
-var acceptVerbs = _require.acceptVerbs;
-var route = _require.route;
-var nonRoutable = _require.nonRoutable;
 var NewRouting = (_dec = route(''), (_class = function () {
     function NewRouting() {
         _classCallCheck(this, NewRouting);
@@ -60,9 +60,14 @@ var NewRouting = (_dec = route(''), (_class = function () {
             this.send({ postReceived: true });
         }
     }, {
+        key: 'delete',
+        value: function _delete() {
+            this.send({ deleteReceived: true });
+        }
+    }, {
         key: 'xyz',
         value: function xyz() {
-            this.send({ putReceived: true });
+            this.send({ putReceivedXyz: true });
         }
     }, {
         key: 'foo',
@@ -72,7 +77,7 @@ var NewRouting = (_dec = route(''), (_class = function () {
     }]);
 
     return NewRouting;
-}(), (_applyDecoratedDescriptor(_class.prototype, 'post', [httpPost], Object.getOwnPropertyDescriptor(_class.prototype, 'post'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'xyz', [httpPut, _dec], Object.getOwnPropertyDescriptor(_class.prototype, 'xyz'), _class.prototype)), _class));
+}(), (_applyDecoratedDescriptor(_class.prototype, 'delete', [httpPost], Object.getOwnPropertyDescriptor(_class.prototype, 'delete'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'xyz', [httpPut, _dec], Object.getOwnPropertyDescriptor(_class.prototype, 'xyz'), _class.prototype)), _class));
 
 
 module.exports = NewRouting;

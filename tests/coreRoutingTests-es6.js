@@ -93,17 +93,22 @@ describe('Controller routing tests', function(){
         utils.getAndCheck('http://localhost:3000/NewRouting/', { }, done, obj => assert.isTrue(obj.getReceived));
     });
 
-    it('posts to a default route name', function(done){
+    it('posts to a conventional route name', function(done){
         utils.postAndCheck('http://localhost:3000/NewRouting/', { }, done, obj => assert.isTrue(obj.postReceived));
+    });
+
+    it('puts to a default route name', function(done){
+        utils.putAndCheck('http://localhost:3000/NewRouting/', { }, done, obj => assert.isTrue(obj.putReceivedXyz));
+    });
+
+    it('rejects conventional verb when verb is manually specified', function(done){
+        utils.verbsAreRejected('http://localhost:3000/NewRouting/delete', done, ['get', 'put', 'delete']);
     });
 
     it('overridden conventional route name', function(done){
         utils.postAndCheck('http://localhost:3000/NewRouting/delete', { }, done, obj => assert.isTrue(obj.deleteReceived));
     });
 
-    it('empty route name', function(done){
-        utils.putAndCheck('http://localhost:3000/NewRouting/', { }, done, obj => assert.isTrue(obj.putReceived));
-    });
 
     it('routes to a regular route name', function(done){
         utils.getAndCheck('http://localhost:3000/NewRouting/foo', { }, done, obj => assert.isTrue(obj.fooReceived));
