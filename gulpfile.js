@@ -3,7 +3,6 @@ var gulp = require('gulp'),
 	mocha = require('gulp-mocha'),
 	gprint = require('gulp-print'),
 	babel = require('gulp-babel'),
-	karma = require('karma').Server,
 	plumber = require('gulp-plumber'),
 	notify = require('gulp-notify'),
 	fs = require('fs');
@@ -65,31 +64,5 @@ gulp.task('test', function () {
 
 	gulp.src('tests/**/!(*-es6.js)') //we don't want es6 files - just the transpiled results
 		.pipe(mocha())
-		.on('end', mochaTestsDone);
-
-	function mochaTestsDone(){
-		server.close();
-		return;
-		let filesToLoad = [
-				'testUtil/jquery-2.1.4.min.js', //for $.ajax
-				'testUtil/karmaTestSetup.js' //resets my utils global with client-side code to run and verify my paths with $.ajax
-			],
-			blackList = [
-				'parameterSnifferTests.js',
-				'requestDiscoveryTests.js',
-				'sinonDiscoveryTests.js',
-				'createAllControllersTests.js'
-			].map(f => f.toLowerCase());
-
-		let allTestFiles = fs.readdirSync('./tests');
-		filesToLoad.push(...allTestFiles.filter(f => !/-es6.js$/.test(f) && blackList.indexOf(f.toLowerCase()) < 0).map(f => `./tests/${f}`));
-
-		//now re-run the relevant tests in an actual browser with acctual ajax calls
-		gulp.src(filesToLoad)
-			.pipe(karma({
-				configFile: __dirname + "/karma.conf.js",
-				singleRun: true
-			}))
-			.on('end', function(){ server.close(); });
-	}
+		.on('end', () => server.close());
 });

@@ -83,6 +83,15 @@ function checkRoutesAndVerbs(uri, verbs){
     });
 }
 
+function shallowObjEqual(obj1, obj2){
+    if (obj1 == null && obj2 == null) return true;
+
+    let keys1 = Object.keys(obj1),
+        keys2 = Object.keys(obj2);
+
+    return keys1.length == keys2.length && keys1.every(k => obj1[k] == obj2[k]);
+}
+
 function verifyCreateControllerSpyCalls(spy, calls){
     assert.equal(spy.callCount, calls.length, 'total count wrong');
     let callsToVerify = calls.map((c, i) => spy.getCall(i));
@@ -91,7 +100,7 @@ function verifyCreateControllerSpyCalls(spy, calls){
 
     //I don't pass the app value in for all calls to verify, so the args are shifted
     callsToVerify.forEach(spyCall => assert.equal(1, calls.filter(callToVerify =>
-        callToVerify[0] === spyCall.args[1] && callToVerify[1] === spyCall.args[2]).length, `Missing call for ${spyCall.args[1]}`)
+        callToVerify[0] == spyCall.args[1] && shallowObjEqual(callToVerify[1], spyCall.args[2])).length, `Missing call for ${spyCall.args[1]}`)
     );
 }
 

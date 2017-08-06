@@ -19,10 +19,19 @@ function descendAndCall(app, basePath, config, overrides, subDirectory = '') {
 }
 
 function createAllControllers(app, config, _overrides){
-    let overrides = _overrides || {};
+    config = config || {};
+    _overrides = _overrides || {};
+    //support the old overrides arg
+    let overrides = {
+        controllerPath: _overrides.controllerPath || config.controllerPath,
+        __dirname: _overrides.__dirname || config.__dirname
+    };
+    if (!overrides.controllerPath) delete overrides.controllerPath;
+    if (!overrides.__dirname) delete overrides.__dirname;
+
     let classBasePath = path.resolve(overrides.__dirname || path.dirname('.'), overrides.controllerPath || 'controllers').replace(/\\/g, '/');
 
-    descendAndCall(app, classBasePath, config, _overrides);
+    descendAndCall(app, classBasePath, config, overrides);
 }
 
 module.exports = createAllControllers;
