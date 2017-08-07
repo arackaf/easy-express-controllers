@@ -1,6 +1,6 @@
 # easy-express-controllers
 
-Adds traditional MVC style controller support to Express with ES6 class, and ES-next decorators.
+This project adds traditional MVC controller support to Express with JavaScript classes, and ES-next decorators.  This allows you to set up your Express routes with simpler code, and significantly less boilerplate.
 
 For example, if this class was in product.js
 
