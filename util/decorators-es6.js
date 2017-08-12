@@ -4,22 +4,42 @@ function controller({ path, defaultVerb = 'get' } = {}){
     }
 }
 
+/**
+ * Marks method to accessible via GET
+ * @param {string} routeName Specifies roure override for this method
+ */
 function httpGet(routeName) {
     return _applyUniversalHttpDecorator('get', routeName, arguments);
 }
 
+/**
+ * Marks method to accessible via POST
+ * @param {string} routeName Specifies roure override for this method
+ */
 function httpPost(routeName) {
     return _applyUniversalHttpDecorator('post', routeName, arguments);
 }
 
+/**
+ * Marks method to accessible via PUT
+ * @param {string} routeName Specifies roure override for this method
+ */
 function httpPut(routeName) {
     return _applyUniversalHttpDecorator('put', routeName, arguments);
 }
 
+/**
+ * Marks method to accessible via DELETE
+ * @param {string} routeName Specifies roure override for this method
+ */
 function httpDelete(routeName) {
     return _applyUniversalHttpDecorator('delete', routeName, arguments);
 }
 
+/**
+ * Marks method to accessible via PATCH
+ * @param {string} routeName Specifies roure override for this method
+ */
 function httpPatch(routeName) {
     return _applyUniversalHttpDecorator('patch', routeName, arguments);
 }
