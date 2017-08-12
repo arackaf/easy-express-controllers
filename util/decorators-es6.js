@@ -1,3 +1,9 @@
+/**
+ * Gets through folder tree and registers every controller found
+ * @param {Object} config controller configuration
+ * @param {string} config.path override the path to this controller. defaults to the path to the class within the controllers directory
+ * @param {string} config.defaultVerb set a default verb for all methods. defaults to 'get'
+ */
 function controller({ path, defaultVerb = 'get' } = {}){
     return function (target, name, decorator){
         target.controllerSettings = { path, defaultVerb };
@@ -6,7 +12,7 @@ function controller({ path, defaultVerb = 'get' } = {}){
 
 /**
  * Marks method to accessible via GET
- * @param {string} routeName Specifies roure override for this method
+ * @param {string} routeName Specifies roure override for this method. Defaults to the method name it's attached to.
  */
 function httpGet(routeName) {
     return _applyUniversalHttpDecorator('get', routeName, arguments);
@@ -14,7 +20,7 @@ function httpGet(routeName) {
 
 /**
  * Marks method to accessible via POST
- * @param {string} routeName Specifies roure override for this method
+ * @param {string} routeName Specifies roure override for this method. Defaults to the method name it's attached to.
  */
 function httpPost(routeName) {
     return _applyUniversalHttpDecorator('post', routeName, arguments);
@@ -22,7 +28,7 @@ function httpPost(routeName) {
 
 /**
  * Marks method to accessible via PUT
- * @param {string} routeName Specifies roure override for this method
+ * @param {string} routeName Specifies roure override for this method. Defaults to the method name it's attached to. 
  */
 function httpPut(routeName) {
     return _applyUniversalHttpDecorator('put', routeName, arguments);
@@ -30,7 +36,7 @@ function httpPut(routeName) {
 
 /**
  * Marks method to accessible via DELETE
- * @param {string} routeName Specifies roure override for this method
+ * @param {string} routeName Specifies roure override for this method. Defaults to the method name it's attached to.
  */
 function httpDelete(routeName) {
     return _applyUniversalHttpDecorator('delete', routeName, arguments);
@@ -38,7 +44,7 @@ function httpDelete(routeName) {
 
 /**
  * Marks method to accessible via PATCH
- * @param {string} routeName Specifies roure override for this method
+ * @param {string} routeName Specifies roure override for this method. Defaults to the method name it's attached to.
  */
 function httpPatch(routeName) {
     return _applyUniversalHttpDecorator('patch', routeName, arguments);

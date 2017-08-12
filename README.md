@@ -213,20 +213,20 @@ will all work as expected.
 Wiring these controllers up is simple.
 
 ```javascript
-const easyControllers = require('easy-express-controllers').easyControllers;
-easyControllers.createAllControllers(app, {__dirname: './node-dest', controllerPath: 'myControllers'});
+const {createAllControllers} = require('easy-express-controllers');
+createAllControllers(app, {__dirname: './node-dest', controllerPath: 'myControllers'});
 ```
 
 this tells easy-express-controllers that your controller classes are in `./node-dest/myControllers`.  If you name your controllers directory `controllers` then you can leave that option off, since it's the default.
 
 ```javascript
-easyControllers.createAllControllers(app, {__dirname: './node-dest'});
+createAllControllers(app, {__dirname: './node-dest'});
 ```
 
 and if your (transpiled) controllers directory is at the top level, relative to where this code is being run, you can just do
 
 ```javascript
-easyControllers.createAllControllers(app);
+createAllControllers(app);
 ```
 
 And of course everything is configurable.  See below for the full docs.  If you've already been using this library, note that all of the old configuration will continue to work now and going forward, even though I've simplified a few things.
@@ -335,8 +335,8 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 ## Turning an ES6 class into express paths ##
 
 ```javascript
-var easyControllers = require('easy-express-controllers').easyControllers;
-easyControllers.createController(app, 'person');
+const {createController} = require('easy-express-controllers');
+createController(app, 'person');
 ```
 The code above will require `person.js` from under a root-level `controllers` directory.
 
@@ -345,25 +345,25 @@ This code gets to the root controllers directory in part with `path.dirname('.')
 For example, if for whatever reason you're running `createController` from a module one level beneath the root, and pointing to a root level directory called `controllers2` then this code will work
 
 ```javascript
-easyControllers.createController(app, 'books/foo', { __dirname: __dirname, controllerPath: '../controllers2' });
+createController(app, 'books/foo', { __dirname: __dirname, controllerPath: '../controllers2' });
 ```
 
 Or of course this would also work under the same circumstances, assuming `process.cwd` could be used.
 
 ```javascript
-easyControllers.createController(app, 'books/foo', { controllerPath: 'controllers2' });
+createController(app, 'books/foo', { controllerPath: 'controllers2' });
 ```
 
 To have easy-express-controllers walk your directory tree and create all controllers *for you*, you can also call `createAllControllers`
 
 ```javascript
-easyControllers.createAllControllers(app);
+createAllControllers(app);
 ```
 
 This sniffs out all js files at any level under your controllers directory, and calls `createController` for you.  By default, only `.js` files will be processed; if your es6 transpiled files are named with a `.es6` extension (or something else that's not `.js`) then you'll be all set.  If your ES6 files have a .js extension, then you can pass a config object as your second argumentwith a `fileTest` property specifying which files to process, like so
 
 ```javascript
-easyControllers.createAllControllers(app, { fileTest: f => !/-es6\.js$/i.test(f) });
+createAllControllers(app, { fileTest: f => !/-es6\.js$/i.test(f) });
 ```
 
 which of course will skip processing for all files that end in `-es6.js`.
