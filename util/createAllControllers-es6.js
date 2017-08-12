@@ -21,7 +21,7 @@ function descendAndCall(app, basePath, config, overrides, subDirectory = '') {
 /**
  * Gets through folder tree and registers every controller found
  * @param {express} app Express app instance
- * @param {Object} config 
+ * @param {Object} config Optional config object
  * @param {string} config.controllerPath configures controllers directory - defaults to "controllers"
  * @param {string} config.__dirname path from which controllerPath is located - defaults to path.dirname('.')
  * @param {function} config.fileTest configures file test - defauts to () => true
