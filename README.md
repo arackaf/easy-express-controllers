@@ -59,6 +59,52 @@ fetch('/product/')
 
 which will return `{"products":[{"id":1,"name":"Product 1"}]}`
 
+---
+
+**NOTE THE DESCTUTURING IN THE CLASS METHODS**
+
+To avoid difficulties, remember that you have to do
+
+```javascript
+export default class Product {
+    @httpGet
+    getProduct({id}){
+        this.send({name: 'Some Product', id: id});
+    }
+}
+```
+
+as opposed to something like
+
+```javascript
+export default class Product {
+    @httpGet
+    getProduct(id){  // <------- WRONG - won't work!!!
+        this.send({name: 'Some Product', id: id});
+    }
+}
+```
+
+which many MVC frameworks support.
+
+It's not only viciously difficult to parse a function's definition to sniff out variable names (especially now that default values and 
+destructuring are allowed) it's effecively impossible since transpilers can, and do change the name of function parameters.
+
+So your methods will be passed a single object, containing properties of every parameter sent over the wire.  You can destructure whatever 
+you need in the parameter list, or of course just deal with the object itself
+
+```javascript
+export default class Product {
+    @httpGet
+    getProduct(params){
+        let id = params.id; // <----- fine if you prefer
+        this.send({name: 'Some Product', id: id});
+    }
+}
+```
+
+---
+
 Paths are also respected, so if this class is inside an admin directory
 
 ```javascript
