@@ -18,6 +18,8 @@ var easyControllers = {
 };
 
 module.exports = {
+    createController,
+    createAllControllers,    
     easyControllers,
     controller,
     httpGet,

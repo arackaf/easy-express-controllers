@@ -25,6 +25,7 @@ function descendAndCall(app, basePath, config, overrides, subDirectory = '') {
  * @param {string} config.controllerPath configures controllers directory - defaults to "controllers"
  * @param {string} config.__dirname path from which controllerPath is located - defaults to path.dirname('.')
  * @param {function} config.fileTest configures file test - defauts to () => true
+ * @param {Object} _overrides no longer needed, but being kept indefinitely for backward compatibility with prior versions
  */
 function createAllControllers(app, config, _overrides){
     config = config || {};
