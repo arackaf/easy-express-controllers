@@ -18,9 +18,9 @@ export default class Product {
         this.send({saved: true});
     }
 
-    //you can also override the route
-    //This will use the default route, so GET product/
-    //if I'd written @httpGet('all') this action would be
+    //You can also override the route
+    //This will use the default route, meaning GET product/
+    //If I'd written @httpGet('all') this action would be
     //available at GET product/all
     @httpGet('') 
     allProducts(){
@@ -49,7 +49,7 @@ fetch('/product/save',
  .then(resp => console.log(resp));
 ```
 
-which will return `{"saved":true}`. Or 
+which will log `{"saved":true}`. Or 
 
 ```javascript
 fetch('/product/')
@@ -57,7 +57,7 @@ fetch('/product/')
     .then(resp => console.log(resp));
 ```
 
-which will return `{"products":[{"id":1,"name":"Product 1"}]}`
+which will log `{"products":[{"id":1,"name":"Product 1"}]}`
 
 ---
 
@@ -90,7 +90,7 @@ which many MVC frameworks support.
 It's not only viciously difficult to parse a function's definition to sniff out variable names (especially now that default values and 
 destructuring are allowed) it's effecively impossible since transpilers can, and do change the name of function parameters.
 
-So your methods will be passed a single object, containing properties of every parameter sent over the wire.  You can destructure whatever 
+So your methods will be passed a single object, containing properties for every parameter sent over the wire.  You can destructure whatever 
 you need in the parameter list, or of course just deal with the object itself
 
 ```javascript
@@ -132,7 +132,7 @@ fetch('/admin/settings/getSettings?id=12')
     .then(resp => console.log(resp));
 ```
 
-will return `{"membershipLevel":"Pro","id":"12"}`, while 
+will log `{"membershipLevel":"Pro","id":"12"}`, while 
 
 ```javascript
 fetch('/admin/settings/save', 
@@ -144,7 +144,7 @@ fetch('/admin/settings/save',
  .then(resp => console.log(resp));
 ```
 
-will return  `{"saved":true}`
+will log  `{"saved":true}`
 
 You can also create a more traditional REST api, like so
 
@@ -357,6 +357,7 @@ createController(app, 'books/foo', { controllerPath: 'controllers2' });
 To have easy-express-controllers walk your directory tree and create all controllers *for you*, you can also call `createAllControllers`
 
 ```javascript
+const {createAllControllers} = require('easy-express-controllers');
 createAllControllers(app);
 ```
 
