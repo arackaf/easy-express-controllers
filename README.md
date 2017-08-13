@@ -37,7 +37,7 @@ fetch('/product/getProduct?id=12')
     .then(resp => console.log(resp));
 ```
 
-and get back `{"name":"Some Product","id":"12"}`.  Or
+and log `{"name":"Some Product","id":"12"}`.  Or
 
 ```javascript
 fetch('/product/save', 
@@ -146,7 +146,7 @@ fetch('/admin/settings/save',
 
 will log  `{"saved":true}`
 
-You can also create a more traditional REST api, like so
+You can also create a more traditional REST api, like this
 
 ```javascript
 import {httpGet, httpPost} from 'easy-express-controllers';
@@ -318,8 +318,7 @@ Inside the controller method the following methods from the response object will
 
 ## Using parameters in route methods ##
 
-Methods are passed an object with all values from `request.params`, `request.query`, and `request.body` in that order of precedence: a value from `request.params` override a matching value from `request.body`. You can either accept the object as is, or destructure what you need right in the method definition,
- as the examples above do.
+Methods are passed an object with all values from `request.params`, `request.query`, and `request.body` in that order of precedence: a value from `request.params` overrides a matching value from `request.body`. You can either accept the object as is, or destructure what you need right in the method definition, as the examples above do.
 
 **NOTE**: to ensure parameter parsing works make sure you have your middleware setup appropriately:
 
