@@ -2,6 +2,8 @@
 
 This project adds traditional MVC controller support to Express with JavaScript classes, and ES-next decorators.  This allows you to set up your Express routes with simpler code, and significantly less boilerplate.
 
+Special thanks to Oleksandr Hulyi https://github.com/pamidur for his work in adding default Web API-style routes, as well as default route paths.
+
 For example, if this class was in product.js
 
 ```javascript
