@@ -9,7 +9,10 @@ function descendAndCall(app, basePath, config, overrides, subDirectory = "") {
 
   files.forEach(f => {
     if (fs.statSync(`${adjustedBasePath}/${f}`).isDirectory()) {
-      descendAndCall(app, basePath, config, overrides, subDirectory + `${f}/`);
+      if (f != ".esm-cache") {
+        //hard code to protect for JDalton's ESM loader
+        descendAndCall(app, basePath, config, overrides, subDirectory + `${f}/`);
+      }
     } else {
       if (!/.js$/i.test(f)) return;
       if (!config.fileTest(f)) return;
