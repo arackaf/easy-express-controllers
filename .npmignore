@@ -5,14 +5,11 @@ createAllControllersTest4
 createAllControllersTest5
 createAllControllersTest6
 controllers
+controllers-src
 controllers2
-tests
+controllers2-src
+test
 testUtil
 transpile
 .idea
-gulpfile-es6.js
 gulpfile.js
-karma.conf.js
-runner.htm
-runTestControllers-es6.js
-runTestControllers.js

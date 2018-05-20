@@ -8,21 +8,21 @@ const notify = require("gulp-notify");
 const fs = require("fs");
 
 gulp.task("transpile-all", function() {
+  transpileFolder("controllers");
+  transpileFolder("controllers2");
+});
+
+function transpileFolder(name) {
   gulp
-    .src("**/**-es6.js")
+    .src(`./${name}-src/**/**.js`)
     .pipe(babel({ plugins: ["transform-decorators-legacy"] }))
-    .pipe(
-      rename(function(path) {
-        path.basename = path.basename.replace(/-es6$/, "");
-      })
-    )
-    .pipe(gulp.dest(""))
+    .pipe(gulp.dest(`./${name}`))
     .pipe(
       gprint(function(filePath) {
         return "File processed: " + filePath;
       })
     );
-});
+}
 
 gulp.task("transpile-watch", function() {
   return gulp.watch("**/**-es6.js", function(obj) {

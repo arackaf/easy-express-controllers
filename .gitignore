@@ -3,12 +3,5 @@ node_modules/
 util/decorators.js
 util/createController.js
 util/createAllControllers.js
-controllers2/books/Foo.js
-controllers/publisher/publisherDetails.js
-controllers/books/BookDefaultPost.js
-controllers/books/Book.js
-controllers/Person.js
-controllers/GlobalController.js
-controllers/NewRouting3.js
-controllers/NewRouting.js
-controllers/ExtendedDecorators.js
+controllers
+controllers2
