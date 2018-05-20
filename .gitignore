@@ -2,7 +2,6 @@ node_modules/
 .idea/
 tests/requestDiscoveryTests.js
 tests/coreRoutingTests.js
-testUtil/testSetup.js
 expressController.js
 controllers/Person.js
 runTestControllers.js
