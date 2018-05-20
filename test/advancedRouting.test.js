@@ -9,10 +9,7 @@ afterAll(() => {
 
 describe("Advanced routing tests", function() {
   it("routes default get paths", function(done) {
-    utils.getAndCheck("http://localhost:3000/globalRoute1", {}, done, obj => {
-      console.log("RECEIVED", obj);
-      assert.isTrue(obj.received);
-    });
+    utils.getAndCheck("http://localhost:3000/globalRoute1", {}, done, obj => assert.isTrue(obj.received));
   });
 
   it("rejects default get paths that was overridden", function(done) {

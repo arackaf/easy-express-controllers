@@ -4,10 +4,9 @@ var request = require("request");
 var bodyParser = require("body-parser");
 var expressController = require("../index");
 var cors = require("cors");
-var app;
 
 function start() {
-  app = express();
+  global.app = express();
   app.use(bodyParser.json()); // to support JSON-encoded bodies
   app.use(
     bodyParser.urlencoded({
@@ -114,17 +113,17 @@ function shallowObjEqual(obj1, obj2) {
 }
 
 function verifyCreateControllerSpyCalls(spy, calls) {
-  assert.equal(spy.callCount, calls.length, "total count wrong");
-  let callsToVerify = calls.map((c, i) => spy.getCall(i));
+  assert.equal(spy.mock.calls.length, calls.length, "total count wrong");
+  let callsToVerify = calls.map((c, i) => spy.mock.calls[i]);
 
-  assert.isFalse(callsToVerify.some(c => c.args[0] !== app), "Some calls missing app param");
+  assert.isFalse(callsToVerify.some(c => c[0] !== -1), "Some calls missing app param");
 
   //I don't pass the app value in for all calls to verify, so the args are shifted
   callsToVerify.forEach(spyCall =>
     assert.equal(
       1,
-      calls.filter(callToVerify => callToVerify[0] == spyCall.args[1] && shallowObjEqual(callToVerify[1], spyCall.args[2])).length,
-      `Missing call for ${spyCall.args[1]}`
+      calls.filter(callToVerify => callToVerify[0] == spyCall[1] && shallowObjEqual(callToVerify[1], spyCall[2])).length,
+      `Missing call for ${spyCall[1]}`
     )
   );
 }
