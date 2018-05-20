@@ -8,8 +8,9 @@ describe("creare all controllers tests", function() {
     var overrides = { controllerPath: "./createAllControllersTest1" };
 
     createAllControllers(app, null, overrides);
+    let i;
 
-    utils.verifyCreateControllerSpyCalls(spy, [[" ", overrides]]);
+    utils.verifyCreateControllerSpyCalls(spy, [["class1", overrides]]);
   });
 
   it("should skip ES6 files configured", function() {
