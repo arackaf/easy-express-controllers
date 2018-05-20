@@ -26,6 +26,7 @@
     "gulp-notify": "2.2.0",
     "gulp-plumber": "1.0.1",
     "gulp-print": "1.1.0",
+    "jest": "^22.4.4",
     "gulp-rename": "1.2.0",
     "karma": "^1.7.0",
     "karma-chai": "0.1.0",
@@ -37,5 +38,8 @@
     "request": "2.64.0",
     "sinon": "1.17.1"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "scripts": {
+    "test": "jest"
+  }
 }
