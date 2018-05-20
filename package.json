@@ -26,8 +26,8 @@
     "gulp-notify": "2.2.0",
     "gulp-plumber": "1.0.1",
     "gulp-print": "1.1.0",
-    "jest": "^22.4.4",
     "gulp-rename": "1.2.0",
+    "jest": "^22.4.4",
     "karma": "^1.7.0",
     "karma-chai": "0.1.0",
     "karma-chrome-launcher": "0.1.12",
@@ -35,7 +35,7 @@
     "karma-mocha": "^1.3.0",
     "mocha": "^3.5.0",
     "proxyquire": "1.7.3",
-    "request": "2.64.0",
+    "request": "^2.86.0",
     "sinon": "1.17.1"
   },
   "dependencies": {},
