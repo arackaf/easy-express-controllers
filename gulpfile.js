@@ -1,16 +1,16 @@
-var gulp = require("gulp"),
-  rename = require("gulp-rename"),
-  mocha = require("gulp-mocha"),
-  gprint = require("gulp-print"),
-  babel = require("gulp-babel"),
-  plumber = require("gulp-plumber"),
-  notify = require("gulp-notify"),
-  fs = require("fs");
+const gulp = require("gulp");
+const rename = require("gulp-rename");
+const mocha = require("gulp-mocha");
+const gprint = require("gulp-print");
+const babel = require("gulp-babel");
+const plumber = require("gulp-plumber");
+const notify = require("gulp-notify");
+const fs = require("fs");
 
 gulp.task("transpile-all", function() {
   gulp
     .src("**/**-es6.js")
-    .pipe(babel({ presets: ["babel-preset-es2015"], plugins: ["transform-decorators-legacy"] }))
+    .pipe(babel({ plugins: ["transform-decorators-legacy"] }))
     .pipe(
       rename(function(path) {
         path.basename = path.basename.replace(/-es6$/, "");
@@ -48,7 +48,7 @@ gulp.task("transpile-watch", function() {
             }
           })
         )
-        .pipe(babel({ presets: ["babel-preset-es2015"], plugins: ["transform-decorators-legacy"] }))
+        .pipe(babel({ plugins: ["transform-decorators-legacy"] }))
         .pipe(
           rename(function(path) {
             path.basename = path.basename.replace(/-es6$/, "");

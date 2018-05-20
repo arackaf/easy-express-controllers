@@ -9,3 +9,6 @@ controllers/books/BookDefaultPost.js
 controllers/books/Book.js
 controllers/Person.js
 controllers/GlobalController.js
+controllers/NewRouting3.js
+controllers/NewRouting.js
+controllers/ExtendedDecorators.js

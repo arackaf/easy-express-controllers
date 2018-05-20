@@ -40,6 +40,6 @@
   },
   "dependencies": {},
   "scripts": {
-    "test": "jest"
+    "test": "jest --runInBand"
   }
 }
