@@ -1,15 +1,9 @@
-createAllControllersTest1
-createAllControllersTest2
-createAllControllersTest3
-createAllControllersTest4
-createAllControllersTest5
-createAllControllersTest6
+dummyControllers
 controllers
 controllers-src
 controllers2
 controllers2-src
 test
 testUtil
-transpile
 .idea
 gulpfile.js
