@@ -1,5 +1,1 @@
-class x{
-
-}
-
-module.exports = x;
+module.exports = class x {};
