@@ -1,6 +1,6 @@
-var createController = require("./util/createController");
-var createAllControllers = require("./util/createAllControllers");
-var { controller, httpGet, httpPost, httpPut, httpDelete, httpPatch, acceptVerbs, route, nonRoutable } = require("./util/decorators");
+var createController = require("./src/createController");
+var createAllControllers = require("./src/createAllControllers");
+var { controller, httpGet, httpPost, httpPut, httpDelete, httpPatch, acceptVerbs, route, nonRoutable } = require("./src/decorators");
 
 var easyControllers = {
   createController,

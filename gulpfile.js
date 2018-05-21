@@ -1,6 +1,5 @@
 const gulp = require("gulp");
 const rename = require("gulp-rename");
-const mocha = require("gulp-mocha");
 const gprint = require("gulp-print");
 const babel = require("gulp-babel");
 const plumber = require("gulp-plumber");
