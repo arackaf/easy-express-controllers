@@ -1,4 +1,4 @@
-const { start, stop } = require("./testSetup");
+const { start, stop } = require("../testSetup");
 
 beforeAll(() => {
   start();
