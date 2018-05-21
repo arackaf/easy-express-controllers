@@ -1,4 +1,4 @@
-const { start, stop } = require("../testUtil/testSetup");
+const { start, stop } = require("./testSetup");
 jest.mock("../src/createController");
 
 const mockFn = require("../src/createController");
