@@ -3,6 +3,5 @@ node_modules/
 util/decorators.js
 util/createController.js
 util/createAllControllers.js
-dummyControllers
 controllers
 controllers2
