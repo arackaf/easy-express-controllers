@@ -1,5 +1,4 @@
 var express = require("express");
-var assert = require("chai").assert;
 var request = require("request");
 var bodyParser = require("body-parser");
 var expressController = require("../index");
@@ -21,7 +20,6 @@ function start() {
   global.app = app;
   global.request = request;
   global.expressController = expressController;
-  global.assert = assert;
   global.easyControllers = expressController.easyControllers;
   easyControllers.createController(app, "books/Foo", { __dirname: __dirname, controllerPath: "../controllers2" });
   easyControllers.createController(app, "Person");
@@ -84,7 +82,7 @@ function verbsAreRejected(uri, done, verbs) {
       if (regVerb == "delete") regVerb = "del";
 
       request[regVerb](uri, {}, function(error, response, obj) {
-        assert.isTrue(new RegExp(`cannot ${verb}`, "i").test(obj), `${uri} didn't fail for ${verb} but should have`); //this is how request handles requests for which the very is not defined....
+        expect(new RegExp(`cannot ${verb}`, "i").test(obj)).toBe(true); //this is how request handles requests for which the very is not defined....
         res();
       });
     }).catch(() => null);
@@ -94,7 +92,7 @@ function verbsAreRejected(uri, done, verbs) {
 function checkRoutesAndVerbs(uri, verbs) {
   verbs.forEach(verb => {
     it(`routes ${verb} to ${uri.replace("http://localhost:3000", "")}`, function(done) {
-      utils[`${verb}AndCheck`](uri, {}, done, obj => assert.isTrue(obj.received));
+      utils[`${verb}AndCheck`](uri, {}, done, obj => expect(obj.received).toBe(true));
     });
   });
   let badVerbs = ["get", "post", "put", "delete"].filter(verb => verbs.indexOf(verb) === -1);
@@ -113,18 +111,14 @@ function shallowObjEqual(obj1, obj2) {
 }
 
 function verifyCreateControllerSpyCalls(spy, calls) {
-  assert.equal(spy.mock.calls.length, calls.length, "total count wrong");
+  expect(spy.mock.calls.length).toBe(calls.length);
   let callsToVerify = calls.map((c, i) => spy.mock.calls[i]);
 
-  assert.isFalse(callsToVerify.some(c => c[0] !== -1), "Some calls missing app param");
+  expect(callsToVerify.some(c => c[0] !== -1)).toBe(false);
 
   //I don't pass the app value in for all calls to verify, so the args are shifted
   callsToVerify.forEach(spyCall =>
-    assert.equal(
-      1,
-      calls.filter(callToVerify => callToVerify[0] == spyCall[1] && shallowObjEqual(callToVerify[1], spyCall[2])).length,
-      `Missing call for ${spyCall[1]}`
-    )
+    expect(calls.filter(callToVerify => callToVerify[0] == spyCall[1] && shallowObjEqual(callToVerify[1], spyCall[2])).length).toBe(1)
   );
 }
 

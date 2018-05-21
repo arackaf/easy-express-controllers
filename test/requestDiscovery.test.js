@@ -21,8 +21,8 @@ describe("Manual http packets work", function() {
   it("gets properly", function(done) {
     request.get("http://localhost:3000/manualGet", { form: { x: 12 } }, function(error, response, obj) {
       obj = JSON.parse(obj);
-      assert.equal("Success", obj.result);
-      assert.equal(12, obj.x);
+      expect(obj.result).toEqual("Success");
+      expect(+obj.x).toBe(12);
       done();
     });
   });
@@ -31,8 +31,8 @@ describe("Manual http packets work", function() {
     request.post("http://localhost:3000/manualPost", { form: { x: 12 } }, function(error, response, obj) {
       obj = JSON.parse(obj);
 
-      assert.equal("Success", obj.result);
-      assert.equal(12, obj.x);
+      expect(obj.result).toBe("Success");
+      expect(+obj.x).toBe(12);
       done();
     });
   });

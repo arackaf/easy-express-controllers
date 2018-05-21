@@ -9,7 +9,7 @@ afterAll(() => {
 
 describe("Nested routes tests", function() {
   it("routes default get paths when controller path overridden", function(done) {
-    utils.getAndCheck("http://localhost:3000/publisher/details", {}, done, obj => assert.isTrue(obj.received));
+    utils.getAndCheck("http://localhost:3000/publisher/details", {}, done, obj => expect(obj.received).toBe(true));
   });
 
   it("rejects default controller path", function(done) {
@@ -18,7 +18,7 @@ describe("Nested routes tests", function() {
 
   it("handles parameters correctly on an overridden global path A", function(done) {
     utils.postAndCheck("http://localhost:3000/global-path-publisher/15?x=1", { y: 2 }, done, obj =>
-      assert.deepEqual(obj, { x: "1", y: 2, userId: "15" })
+      expect(obj).toEqual({ x: "1", y: 2, userId: "15" })
     );
   });
 
