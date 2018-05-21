@@ -1,9 +1,5 @@
-dummyControllers
 controllers
-controllers-src
 controllers2
-controllers2-src
 test
-testUtil
 .idea
 gulpfile.js

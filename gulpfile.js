@@ -13,7 +13,7 @@ gulp.task("transpile-all", function() {
 
 function transpileFolder(name) {
   gulp
-    .src(`./${name}-src/**/**.js`)
+    .src(`./test/${name}-src/**/**.js`)
     .pipe(babel({ plugins: ["transform-decorators-legacy"] }))
     .pipe(gulp.dest(`./${name}`))
     .pipe(

@@ -1,7 +1,4 @@
 node_modules/
 .idea/
-util/decorators.js
-util/createController.js
-util/createAllControllers.js
 controllers
 controllers2
