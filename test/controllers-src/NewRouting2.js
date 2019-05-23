@@ -1,6 +1,6 @@
 const { httpGet, httpPut, httpDelete, httpPost, acceptVerbs, route, nonRoutable } = require("../index");
 
-let NewRouting2 = class NewRouting2 {
+class NewRouting2 {
   get() {
     this.send({ getReceived: true });
   }
@@ -16,7 +16,6 @@ let NewRouting2 = class NewRouting2 {
   put() {
     this.send({ putReceived: true });
   }
-};
-
+}
 
 module.exports = NewRouting2;
