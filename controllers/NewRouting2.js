@@ -1,22 +1,38 @@
-const { httpGet, httpPut, httpDelete, httpPost, acceptVerbs, route, nonRoutable } = require("../index");
+const {
+  httpGet,
+  httpPut,
+  httpDelete,
+  httpPost,
+  acceptVerbs,
+  route,
+  nonRoutable
+} = require("../index");
 
-let NewRouting2 = class NewRouting2 {
+class NewRouting2 {
   get() {
-    this.send({ getReceived: true });
+    this.send({
+      getReceived: true
+    });
   }
 
   post() {
-    this.send({ postReceived: true });
+    this.send({
+      postReceived: true
+    });
   }
 
   delete() {
-    this.send({ deleteReceived: true });
+    this.send({
+      deleteReceived: true
+    });
   }
 
   put() {
-    this.send({ putReceived: true });
+    this.send({
+      putReceived: true
+    });
   }
-};
 
+}
 
 module.exports = NewRouting2;
