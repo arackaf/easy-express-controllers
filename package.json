@@ -21,7 +21,7 @@
     "body-parser": "^1.19.0",
     "cors": "2.7.1",
     "express": "4.x",
-    "gulp": "3.9.1",
+    "gulp": "4.0.2",
     "gulp-babel": "^8.0.0",
     "gulp-print": "^5.0.2",
     "jest": "^24.8.0",
